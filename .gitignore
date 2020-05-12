@@ -34,9 +34,9 @@ npm-debug.log
 .sass-cache
 *.map
 
-.docx
-.txt
-.ps1
+*.docx
+*.txt
+*.ps1
 
 # General
 /{{project_name}}-venv/
