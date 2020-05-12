@@ -1,0 +1,16 @@
+
+- add accounts app      x
+- add apps & user in settings   x
+- add frontend create react app x
+- add graphql endpoint          x
+- create super user
+- add powershell scripts & add to gitignore x
+- gitignore x
+- test backend x
+
+- frontend basic routing
+- upload to github
+
+
+
+- django graphene auth
