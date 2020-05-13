@@ -18,7 +18,7 @@ class Query(graphene.ObjectType):
     def resolve_me(self, info):
         user = info.context.user
         if user.is_anonymous:
-            raise Exception('Authentication Failure!')
+            return None;
         return user
 
     def resolve_users(self, info):
@@ -33,7 +33,7 @@ class CreateUser(graphene.Mutation):
         email = graphene.String(required=True)
 
     def mutate(self, info, email, username, password):
-        user = User.create(
+        user = User.objects.create(
             username=username,
             email=email
         )
