@@ -58,7 +58,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'jarofawesome.urls'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 GRAPHENE = {
-    'SCHEMA': 'jarofawesome.schema.schema'
+    'SCHEMA': 'jarofawesome.schema.schema',
+    'MIDDLEWARE': [
+        'graphql_jwt.middleware.JSONWebTokenMiddleware',
+    ],
 }
 
 TEMPLATES = [
