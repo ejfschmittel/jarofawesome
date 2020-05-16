@@ -35,7 +35,9 @@ npm-debug.log
 *.map
 
 *.docx
+*.sqlite3
 *.txt
+!requirements.txt #Except for foo.dll
 *.ps1
 
 # General

@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import ApolloClient from 'apollo-boost';
+//import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-const client = new ApolloClient({
-  uri: 'http://127.0.0.1:8000/graphql/',
-});
+import client from "./apollo-client"
+
+
+// https://stackoverflow.com/questions/50965347/how-to-execute-an-async-fetch-request-and-then-retry-last-failed-request/51321068#51321068
+
+
+// set context
+
+
 
 ReactDOM.render(
   <React.StrictMode>

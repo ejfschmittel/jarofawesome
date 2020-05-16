@@ -1,0 +1,53 @@
+.main-header{
+    width: 100%;
+    padding: .5rem 8rem;
+    background: var(--primary-color);
+    color: var(--text-color-header);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    a{
+        color: var(--text-color-header);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    &__title{
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        font-weight: 100;
+
+    }
+
+    &__menu{
+
+        ul{
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        li{
+            margin-left: 2rem;
+        }
+        a{
+            display: block;
+            font-size: 1.2rem;
+            padding: .3rem 1rem;
+            border-radius: .3rem;
+
+            transition: all .2s;
+
+            &:hover{
+                background: var( --primary-color-dark)
+            }
+        }
+    }
+
+
+}
+

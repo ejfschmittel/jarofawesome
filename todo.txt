@@ -1,16 +1,32 @@
-
-- add accounts app      x
-- add apps & user in settings   x
-- add frontend create react app x
-- add graphql endpoint          x
-- create super user
-- add powershell scripts & add to gitignore x
-- gitignore x
-- test backend x
-
-- frontend basic routing
-- upload to github
+ - django graphene jwt auth x 
+- user create schema x
+ - add register page + graphql queries  x
+ - test register page                   x
+- add login page + graphql queries      x
+- make login / logout etc work without refresh  x
 
 
+- create Home Page (logged IN)
 
-- django graphene auth
+- verify token on app start (add loading state to auth context)
+
+
+deferr
+- add client remove cache to logout
+- add refresh logic to apollo cilient
+
+
+
+
+
+
+backend:
+   
+
+    - base memory create / edit 
+
+
+frontend:
+    - register page
+    - login page
+
