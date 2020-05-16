@@ -1,7 +1,7 @@
 import graphene
 
 #from categories.schema import Query as CategoryQuery, Mutation as CategoryMutation
-from memories.schema import Query as MemoryQuery
+from memories.schema import Query as MemoryQuery, Mutation as MemoryMutation
 from accounts.schema import Query as UserQuery, Mutation as UserMutation
 
 class Query(
@@ -12,6 +12,7 @@ class Query(
 
 class Mutation(
     UserMutation,
+    MemoryMutation,
     graphene.ObjectType):
     pass
 
