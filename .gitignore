@@ -36,6 +36,8 @@ npm-debug.log
 
 *.docx
 *.sqlite3
+Projekt.docx
+todo.txt
 *.txt
 !requirements.txt #Except for foo.dll
 *.ps1

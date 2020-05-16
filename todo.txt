@@ -9,6 +9,7 @@
 - create Home Page (logged IN)
 
 - verify token on app start (add loading state to auth context)
+    - also get userdata on app start if logged in ()
 
 
 deferr

@@ -1,0 +1,53 @@
+.memory-form{
+
+    box-shadow: 0 .1rem .3rem rgba(0,0,0,.2);
+    padding: 2rem;
+    padding-bottom: 4rem;
+
+    background: var(--white-1);
+
+
+    &__title{
+        font-size: 4rem;
+        text-align: center;
+        margin: -2rem -6rem;
+        border-radius: .5rem;
+        background: #7B9E89;
+
+        margin-bottom: 4rem;
+
+        
+        box-shadow: 0 .1rem .2rem rgba(0,0,0,.2);
+        color: var(--white-1);
+    }
+    
+    &__memory{
+        input{
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.8rem;
+            outline: none;
+
+          
+            border: none;
+            box-shadow: 0 .1rem .2rem rgba(0,0,0,.2);
+        }
+    }
+
+    &__button{
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 40rem;
+        margin-top: 4rem;
+
+        padding: 1.2rem 5rem;
+
+        background: #7B9E89;
+        font-size: 1.6rem;
+        border-radius: .3rem;
+        border: none;
+        box-shadow: 0 .2rem .5rem rgba(0,0,0, .5);
+        color: var(--light-grey-1);
+    }
+}

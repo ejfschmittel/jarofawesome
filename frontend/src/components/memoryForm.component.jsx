@@ -8,14 +8,14 @@ import React from 'react'
 
 const MemoryForm = ({title}) => {
     return (
-        <div>
-            <h1>Create Memory</h1>
+        <div className="memory-form">
+            <h1 className="memory-form__title">Create Memory</h1>
             <form>
-                <div>
-                    <input name="memory"/>
+                <div className="memory-form__memory">
+                    <input name="memory" placeholder="My memory..."/>
                 </div>
 
-                <button>Create Memory</button>
+                <button className="memory-form__button">Create Memory</button>
             </form>
         </div>
     )
