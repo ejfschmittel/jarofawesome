@@ -6,7 +6,15 @@
 - make login / logout etc work without refresh  x
 
 
-- create Home Page (logged IN)
+- create Home Page (logged IN)  x
+
+- create memory functionality x
+
+- get random memory 
+    - backend
+    - frontend
+
+- memory hightlights component (a year ago, a week ago, random memory etc)
 
 - verify token on app start (add loading state to auth context)
     - also get userdata on app start if logged in ()

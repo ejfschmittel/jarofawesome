@@ -12,3 +12,13 @@ export const createMemorySchema = gql`
         }
     }
 `;
+
+export const RECENT_MEMORIES = gql`
+    query{
+        recentMemories{
+            id,
+            memory,
+            date
+        }
+    }
+`;

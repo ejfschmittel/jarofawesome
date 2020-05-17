@@ -7,15 +7,22 @@ from .models import Memory
 class MemoryType(DjangoObjectType):
     class Meta:
         model = Memory
-        fields = ('id','memory', 'description')
+        fields = ('id','memory', 'description', 'date')
 
 class Query(object):
     memory = graphene.Field(MemoryType, id=graphene.Int())
     all_memories = graphene.List(MemoryType)
     random_memory = graphene.Field(MemoryType)
+    recent_memories = graphene.List(MemoryType)
+
 
     def resolve_all_memories(self, info, **kwargs):
         return Memory.objects.all();
+
+    @login_required
+    def resolve_recent_memories(self, info, **kwargs):
+        user = user = info.context.user
+        return Memory.objects.filter(user=user).order_by("-date")[:10]
 
     @login_required
     def resolve_random_memory(self, info, **kwargs):
