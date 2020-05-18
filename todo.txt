@@ -1,18 +1,30 @@
+ordered todo list items
+- add list view my memories
+- inline editable memory text
+- add media backend 
+- add media panel fronten ()
+
+
+how to upload media using graphql
+Media:
+    - type (image, video, audio)
+
+
+open todo list items:
+- add wysiwyg description / textfield to memories (without images for now) 
+- add My memories (list view)
+- add images to memory preview
+- add background random memories (backboard or random sticky notetest)
+- ask to edit after create =
+
+- add media item connection backend
+- add edit memory functionality to detail page
+
+-image fullscreen view
+
+
  - django graphene jwt auth x 
-- user create schema x
- - add register page + graphql queries  x
- - test register page                   x
-- add login page + graphql queries      x
-- make login / logout etc work without refresh  x
 
-
-- create Home Page (logged IN)  x
-
-- create memory functionality x
-
-- get random memory 
-    - backend
-    - frontend
 
 - memory hightlights component (a year ago, a week ago, random memory etc)
 

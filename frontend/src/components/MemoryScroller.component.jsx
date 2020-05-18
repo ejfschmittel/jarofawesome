@@ -20,7 +20,7 @@ const MemoryScroller = ({loading, memories, ...other}) => {
 const MemoryItem = ({memory}) => {
     return (
         <div className="memory-item">
-            <Link to={`memory/{${memory.id}}`}>
+            <Link to={`memories/{${memory.id}}`}>
             <header className="memory-item__header">
                 Memory: <span>{memory.date}</span>
             </header>

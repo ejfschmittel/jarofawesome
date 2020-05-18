@@ -1,6 +1,7 @@
 import graphene 
 from graphql_jwt.decorators import login_required
 from graphene_django import DjangoObjectType
+from graphene_django.filter import DjangoFilterConnectionField
 from random import randint
 from .models import Memory
 
@@ -8,16 +9,25 @@ class MemoryType(DjangoObjectType):
     class Meta:
         model = Memory
         fields = ('id','memory', 'description', 'date')
+      
 
 class Query(object):
     memory = graphene.Field(MemoryType, id=graphene.UUID())
+
+  
     all_memories = graphene.List(MemoryType)
     random_memory = graphene.Field(MemoryType)
     recent_memories = graphene.List(MemoryType)
 
+    @login_required
+    def resolve_all_memories2(self, info, **kwargs):
+        user = user = info.context.user
+        return Memory.objects.filter(user=user)
 
+    @login_required
     def resolve_all_memories(self, info, **kwargs):
-        return Memory.objects.all();
+        user = user = info.context.user
+        return Memory.objects.filter(user=user)
 
     @login_required
     def resolve_recent_memories(self, info, **kwargs):

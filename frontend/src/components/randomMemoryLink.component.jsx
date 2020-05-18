@@ -8,7 +8,7 @@ const RandomMemoryLink = ({children, text,...other}) => {
     const [getRandomMemory] = useLazyQuery(RANOM_MEMORY, {
         onCompleted: ({randomMemory}) => {
             console.log("test")
-            history.push(`/memory/${randomMemory.id}`)
+            history.push(`/memories/${randomMemory.id}`)
         },
         fetchPolicy: "no-cache"
     });

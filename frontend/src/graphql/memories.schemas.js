@@ -42,3 +42,13 @@ export const RANOM_MEMORY = gql`
         }
     }
 `;
+
+export const ALL_MEMORIES = gql`
+    query{
+        allMemories{
+            id,
+            memory,
+            date
+        }
+    }
+`;

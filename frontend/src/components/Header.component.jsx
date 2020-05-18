@@ -24,6 +24,7 @@ const Header = () => {
                     <ul>
                         {token ?
                             <React.Fragment>
+                                <li><Link to={"/memories"}>My Memories</Link></li>
                                  <li><RandomMemoryLink /></li>
                                 <li><a onClick={onLogout}>Logout</a></li>                          
                             </React.Fragment>
