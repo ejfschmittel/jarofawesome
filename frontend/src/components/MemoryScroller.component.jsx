@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
 const MemoryScroller = ({loading, memories, ...other}) => {
@@ -19,6 +20,7 @@ const MemoryScroller = ({loading, memories, ...other}) => {
 const MemoryItem = ({memory}) => {
     return (
         <div className="memory-item">
+            <Link to={`memory/{${memory.id}}`}>
             <header className="memory-item__header">
                 Memory: <span>{memory.date}</span>
             </header>
@@ -27,6 +29,7 @@ const MemoryItem = ({memory}) => {
                 {memory.memory}
                 </span>
             </div>
+            </Link>
         </div>
     )
 }

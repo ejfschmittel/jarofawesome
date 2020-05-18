@@ -10,6 +10,8 @@ import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 
+import MemoryDetail from "./pages/MemoryDetailPage"
+
 
 import "./styles/main.scss";
 
@@ -23,6 +25,8 @@ function App() {
           <Route path="/" component={HomePage} exact={true} />
           <Route path="/signup" component={SignUpPage} />
           <Route path="/login" component={LoginPage} />
+
+          <Route path="/memory/:memoryid" component={MemoryDetail} />
       
         </Switch>
       </Router>

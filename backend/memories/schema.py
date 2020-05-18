@@ -10,7 +10,7 @@ class MemoryType(DjangoObjectType):
         fields = ('id','memory', 'description', 'date')
 
 class Query(object):
-    memory = graphene.Field(MemoryType, id=graphene.Int())
+    memory = graphene.Field(MemoryType, id=graphene.UUID())
     all_memories = graphene.List(MemoryType)
     random_memory = graphene.Field(MemoryType)
     recent_memories = graphene.List(MemoryType)
@@ -33,11 +33,17 @@ class Query(object):
         return None
 
     def resolve_memory(self, info, **kwargs):
+        user = user = info.context.user
+
+        item = None
         id = kwargs.get("id")
-
         if id is not None:
-            return Memory.objects.get(pk=id)
+            item = Memory.objects.get(pk=id)
 
+        
+        print(user)
+        if user and user == item.user:
+            return item
         return None
 
 class CreateMemory(graphene.Mutation):

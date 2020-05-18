@@ -22,3 +22,13 @@ export const RECENT_MEMORIES = gql`
         }
     }
 `;
+
+export const GET_MEMORY = gql`
+    query($id: UUID!){
+        memory(id:$id){
+            id,
+            memory,
+            date
+        }
+    }
+`;
