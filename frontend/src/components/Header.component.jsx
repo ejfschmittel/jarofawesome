@@ -4,6 +4,8 @@ import AuthContext from "../contexts/auth.context"
 
 import {useLogout} from "../hooks/auth.hooks"
 
+import RandomMemoryLink from "./randomMemoryLink.component"
+
 const Header = () => {
     const [logout] = useLogout()
     const {data: {token, username}} = useContext(AuthContext)
@@ -22,7 +24,8 @@ const Header = () => {
                     <ul>
                         {token ?
                             <React.Fragment>
-                                <li><a onClick={onLogout}>Logout</a></li>
+                                 <li><RandomMemoryLink /></li>
+                                <li><a onClick={onLogout}>Logout</a></li>                          
                             </React.Fragment>
                         :
                         <React.Fragment>

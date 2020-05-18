@@ -16,7 +16,13 @@ const MemoryDetailPage = () => {
     return (
         <main>
             <div className="container">
-               <h1>{loading ? "Remember When..." : memory.memory}</h1>
+                <div className="memory-details">
+         
+                        <h1 className="memory-details__memory">{loading ? "Remember When..." : memory.memory}</h1>
+                     
+                 
+                </div>
+               
             </div>
         </main>
     )

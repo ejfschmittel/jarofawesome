@@ -32,3 +32,13 @@ export const GET_MEMORY = gql`
         }
     }
 `;
+
+export const RANOM_MEMORY = gql`
+    query{
+        randomMemory{
+            id,
+            memory,
+            date
+        }
+    }
+`;
