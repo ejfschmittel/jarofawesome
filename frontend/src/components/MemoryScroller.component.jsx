@@ -23,7 +23,9 @@ const MemoryItem = ({memory}) => {
                 Memory: <span>{memory.date}</span>
             </header>
             <div className="memory-item__memory">
+                <span>
                 {memory.memory}
+                </span>
             </div>
         </div>
     )

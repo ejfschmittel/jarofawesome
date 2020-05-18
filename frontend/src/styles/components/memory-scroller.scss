@@ -25,6 +25,10 @@
         margin-right: 1rem;
     }
 
+
+    display: flex;
+    flex-direction: column;
+
     
 
     &__header{
@@ -36,9 +40,16 @@
     }
 
     &__memory{
+        flex: 1;
         padding: 1rem;
-        text-align: center;
-        font-size: 1.2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.4rem;
+
+        span{
+            text-align: center;
+        }
     }
 }
 
