@@ -1,7 +1,7 @@
 import graphene 
 from graphql_jwt.decorators import login_required
 from graphene_django import DjangoObjectType
-from graphene_django.filter import DjangoFilterConnectionField
+
 from random import randint
 from .models import Memory
 
@@ -71,6 +71,41 @@ class CreateMemory(graphene.Mutation):
         )
         return CreateMemory(memory=item)
 
+
+class MemoryInput(graphene.InputObjectType):
+    id = graphene.UUID(required=True)
+    memory = graphene.String(required=False)
+    description = graphene.String(required=False)
+
+class UpdateMemory(graphene.Mutation):
+    memory = graphene.Field(MemoryType)
+
+    class Arguments:
+       data = MemoryInput(required=True)
+
+    @login_required
+    def mutate(self, info, data):
+        user = info.context.user
+
+        memory = Memory.objects.get(pk=data.id)
+
+        for k, v in data.items():
+            if k == "memory" and v != "":
+                setattr(memory, k, v)
+            else:
+                setattr(memory, k, v)
+
+
+        print(memory)
+        try:
+            memory.full_clean()
+            memory.save()
+            return UpdateMemory(memory=memory)
+        except:
+            return UpdateMemory(memory=memory)
+
+
 class Mutation(graphene.ObjectType):
     create_memory = CreateMemory.Field()
+    update_memory = UpdateMemory.Field()
     

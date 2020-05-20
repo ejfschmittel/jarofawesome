@@ -1,5 +1,7 @@
 ordered todo list items
-- add list view my memories
+- add list view my memories 
+    - base list view    x
+    - add filtering 
 - inline editable memory text
 - add media backend 
 - add media panel fronten ()

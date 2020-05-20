@@ -52,3 +52,16 @@ export const ALL_MEMORIES = gql`
         }
     }
 `;
+
+export const UPDATE_MEMORY = gql`
+mutation updateMemory($id:  UUID!, $memory: String){
+    updateMemory(data:{id:$id, memory: $memory}){
+      memory{
+          id,
+        memory,
+        description,
+        date
+      }
+    }
+  }
+`

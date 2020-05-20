@@ -1,0 +1,37 @@
+.editable-field{
+    position: relative;
+    &__selected{
+        background: #fff;
+    }
+
+    &__loading-ico{
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        right: 1rem;
+        top: 50%; 
+        transform: translate(0, -86%);
+
+
+    }
+
+    & > input{    
+        display: block;
+        position: absolute;
+        top: 0;
+
+        bottom: 0;   
+        width: 100%;
+        min-height: 1.2rem;
+        font-size: inherit;
+        height: inherit;
+        outline: none;
+        text-align: inherit;
+        padding: minmax(.2rem, .4rem);
+    }
+
+    & > input.show{
+        display: block;
+    }
+}
+
