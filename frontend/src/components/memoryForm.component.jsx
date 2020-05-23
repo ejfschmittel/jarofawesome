@@ -1,29 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {useLazyQuery, useMutation} from "@apollo/react-hooks"
 import {createMemorySchema} from "../graphql/memories.schemas"
-
+import CreateMemoryContext from "../contexts/createMemory.context"
 /*
     fields (data, onChange)
 
 */
 
 const MemoryForm = ({title}) => {
+    const {onAfterMemoryCreate} = useContext(CreateMemoryContext)
     const [memory, setMemory] = useState("")
     const [createMemory, {loading, data}] = useMutation(createMemorySchema)
 
     
 
-    const onCreateMemory = (e) => {
+    const onCreateMemory = async (e) => {
         e.preventDefault();
 
-      
-
-        createMemory({
-            variables: {
-                memory
-            }
-        }).catch(err => console.log(err))
-
+        try{
+            const response = createMemory({
+                variables: {
+                    memory
+                }
+            })
+            onAfterMemoryCreate(response)
+        }catch(e){
+           console.log(e)
+        }  
     }
 
     return (

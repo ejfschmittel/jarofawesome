@@ -2,9 +2,15 @@ ordered todo list items
 - add list view my memories 
     - base list view    x
     - add filtering 
-- inline editable memory text
 - add media backend 
 - add media panel fronten ()
+
+- retrigger afte add:
+- add event system (context => ) // write yourself
+- look at sytems others created
+
+- how to trigger rerendering on add ?
+- how to handle loading, error, success in react
 
 
 how to upload media using graphql
