@@ -1,14 +1,71 @@
 import graphene 
+
 from graphql_jwt.decorators import login_required
 from graphene_django import DjangoObjectType
 
+from graphene_django.filter import DjangoFilterConnectionField
+
 from random import randint
 from .models import Memory
+import django_filters
+
+from datetime import date, datetime, time
+
 
 class MemoryWriteType(DjangoObjectType):
     class Meta:
         model = Memory
         fields = ('id','memory', 'description', 'datetime')
+
+
+class MemoryNode(DjangoObjectType):
+    date = graphene.Date(source='date')
+
+    class Meta:
+        model = Memory
+        fields = ('id', 'memory', 'description', 'datetime')
+      
+        interfaces = (graphene.relay.Node,)
+
+
+
+class MemoryFilter(django_filters.FilterSet):
+
+    s = django_filters.CharFilter(method="filter_search")
+    from_date = django_filters.CharFilter(field_name="datetime", method="filter_from_date")
+    to_date = django_filters.CharFilter(field_name="datetime", method="filter_to_date")
+
+
+    #order_by_date_asc = django_filters.CharFilter(field_name="datetime")
+  
+    order_by = django_filters.OrderingFilter(
+       fields=(
+           ('-datetime', 'newest'),
+           ('datetime', 'oldest'),
+       )
+    )
+    
+
+    def filter_from_date(self, queryset, name, value):
+        lookup = '__'.join([name, 'gt'])
+        d = datetime.strptime(value, "%Y-%m-%d")     
+        return queryset.filter(**{lookup: d})
+    
+    def filter_to_date(self, queryset, name, value):
+        lookup = '__'.join([name, 'lt'])
+        d = datetime.combine(datetime.strptime(value, "%Y-%m-%d")  , time.max)
+        return queryset.filter(**{lookup: d})
+
+    def filter_search(self, queryset, name, value):
+        lookup = '__'.join(["memory", 'icontains'])
+        # extends search lookup to description / etc
+        return queryset.filter(**{lookup: value})
+
+    class Meta:
+        model = Memory
+        fields = ['memory', 'datetime']
+
+
 
 class MemoryReadType(DjangoObjectType):
     date = graphene.Date(source='date')
@@ -25,16 +82,16 @@ class MemoryInput(graphene.InputObjectType):
 
 class Query(object):
     memory = graphene.Field(MemoryWriteType, id=graphene.UUID())
-    all_memories = graphene.List(MemoryReadType)
+    all_memories = DjangoFilterConnectionField(MemoryNode, filterset_class=MemoryFilter)
     random_memory = graphene.Field(MemoryReadType)
     recent_memories = graphene.List(MemoryReadType)
-
-
+    
     @login_required
     def resolve_all_memories(self, info, **kwargs):
         user = user = info.context.user
         return Memory.objects.filter(user=user)
-
+    
+   
     @login_required
     def resolve_recent_memories(self, info, **kwargs):
         user = user = info.context.user
