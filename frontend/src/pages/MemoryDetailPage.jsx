@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom"
 import {useQuery, useMutation} from "@apollo/react-hooks"
 import {GET_MEMORY, UPDATE_MEMORY} from "../graphql/memories.schemas"
 
+import MemoryMediaList from "../components/memoryMediaList.component"
+
 
 const Spinner = ({height, width}) => {
     return (
@@ -129,6 +131,9 @@ const MemoryDetailPage = () => {
                             </EditableField>
                            
                         </h1>
+
+
+                        <MemoryMediaList id={memory ? memory.id : null} />
                      
                  
                 </div>

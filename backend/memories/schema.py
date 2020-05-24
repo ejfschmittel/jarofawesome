@@ -6,10 +6,32 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from random import randint
-from .models import Memory
+from .models import Memory, MemoryFile
 import django_filters
 
 from datetime import date, datetime, time
+
+
+class MemoryFileType(DjangoObjectType):
+
+    
+
+    class Meta:
+        model = MemoryFile
+        fields = ('id', 'file', 'external_url')
+
+    def resolve_file(self, info):
+        print(self)
+        if self.file:
+            return "http://127.0.0.1:8000" + self.file.url 
+        return ""
+
+        
+
+
+    
+
+
 
 
 class MemoryWriteType(DjangoObjectType):
@@ -26,6 +48,7 @@ class MemoryNode(DjangoObjectType):
         fields = ('id', 'memory', 'description', 'datetime')
       
         interfaces = (graphene.relay.Node,)
+
 
 
 
@@ -74,6 +97,9 @@ class MemoryReadType(DjangoObjectType):
         model = Memory
         fields = ('id', 'memory', 'description')
 
+
+
+
 class MemoryInput(graphene.InputObjectType):
     id = graphene.UUID(required=True)
     memory = graphene.String(required=False)
@@ -81,20 +107,31 @@ class MemoryInput(graphene.InputObjectType):
       
 
 class Query(object):
-    memory = graphene.Field(MemoryWriteType, id=graphene.UUID())
+    memory = graphene.Field(MemoryReadType, id=graphene.UUID())
     all_memories = DjangoFilterConnectionField(MemoryNode, filterset_class=MemoryFilter)
     random_memory = graphene.Field(MemoryReadType)
     recent_memories = graphene.List(MemoryReadType)
+
+    memory_files = graphene.List(MemoryFileType, id=graphene.UUID())
     
     @login_required
     def resolve_all_memories(self, info, **kwargs):
         user = user = info.context.user
         return Memory.objects.filter(user=user)
     
+
+    @login_required
+    def resolve_memory_files(self, info, id):
+        user = info.context.user
+        memory = Memory.objects.get(pk=id)
+  
+        if user == memory.user:
+           return MemoryFile.objects.filter(memory=id)
+        return None
    
     @login_required
     def resolve_recent_memories(self, info, **kwargs):
-        user = user = info.context.user
+        user = info.context.user
         return Memory.objects.filter(user=user).order_by("-datetime")[:10]
 
     @login_required

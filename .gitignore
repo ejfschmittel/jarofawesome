@@ -30,6 +30,8 @@ npm-debug.log
 /webpack-stats.json
 /jquery-webpack-stats.json
 
+media/*
+
 # Sass
 .sass-cache
 *.map
@@ -48,6 +50,7 @@ todo.txt
 /env/
 /output/
 /cache/
+/media/
 boilerplate.zip
 
 # Spritesmith

@@ -1,5 +1,15 @@
 
+
+
+Later todos:
+- make logo
+- set page titles 
+- clean scss
+- rework preview memory item styling
+- allow url input to change things
+- add delay to loading
 - add differnt coors to memory display
+
 
 
 

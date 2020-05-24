@@ -55,6 +55,16 @@ export const ALL_MEMORIES = gql`
     }
 `;
 
+export const MEMORY_FILES = gql`
+    query memoryFiles($id: UUID!){
+        memoryFiles(id: $id){
+        id,
+        file,
+        externalUrl
+        }
+    }
+`;
+
 export const MY_MEMORIES = gql`
     query MyMemories($s: String, $fromDate: String, $toDate: String, $orderBy: String!){
         allMemories(s:$s, fromDate:$fromDate, toDate:$toDate, orderBy: $orderBy){
