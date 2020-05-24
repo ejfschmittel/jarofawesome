@@ -1,0 +1,49 @@
+@mixin input-box{
+    height: 3rem;   
+    padding: 0 1rem;
+    border: none;
+    outline: none;
+  
+    font-size: 1.2rem;
+
+    &:not(:last-child){
+        border-right: 1px solid #eee;
+    }
+    
+
+    transition: all .2s;
+
+    &:focus{
+        background: #eee;
+    }
+
+}
+
+.memory-filter{
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    margin: 2rem 0;
+
+
+    &__search{
+        @include input-box;
+        flex:1;
+       
+        
+    }
+    
+
+
+
+    &__date-filter{
+        @include input-box;
+    }
+
+    &__sort-by{
+        @include input-box;
+        
+    }
+}

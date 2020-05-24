@@ -3,6 +3,14 @@ ordered todo list items
     - base list view    x
     - add filtering     
 
+    - filter by field ( dropdown)
+    - search field 
+    - in range (two dates)
+
+    - add differnt colors to memory preview items
+
+- add date input to create memory form x
+
 - change date to datetime (but only send date - add seconds automatically)
 
 - add media backend 
