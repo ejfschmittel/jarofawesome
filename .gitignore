@@ -30,7 +30,7 @@ npm-debug.log
 /webpack-stats.json
 /jquery-webpack-stats.json
 
-media/*
+media/
 
 # Sass
 .sass-cache
