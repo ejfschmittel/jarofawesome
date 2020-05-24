@@ -23,6 +23,8 @@ export const RECENT_MEMORIES = gql`
     }
 `;
 
+
+
 export const GET_MEMORY = gql`
     query($id: UUID!){
         memory(id:$id){
@@ -49,6 +51,20 @@ export const ALL_MEMORIES = gql`
             id,
             memory,
             date
+        }
+    }
+`;
+
+export const MY_MEMORIES = gql`
+    query MyMemories($s: String, $fromDate: String, $toDate: String, $orderBy: String!){
+        allMemories(s:$s, fromDate:$fromDate, toDate:$toDate, orderBy: $orderBy){
+            edges{
+                node{
+                    id,
+                    memory,
+                    date,
+                }
+            } 
         }
     }
 `;

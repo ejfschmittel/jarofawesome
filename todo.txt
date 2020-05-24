@@ -1,13 +1,10 @@
-ordered todo list items
-- add list view my memories 
-    - base list view    x
-    - add filtering     
 
-    - filter by field ( dropdown)
-    - search field 
-    - in range (two dates)
+- add differnt coors to memory display
 
-    - add differnt colors to memory preview items
+
+
+
+- add differnt colors to memory preview items
 
 - add date input to create memory form x
 
