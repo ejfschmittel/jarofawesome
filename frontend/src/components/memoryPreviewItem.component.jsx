@@ -1,9 +1,42 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ContentLoader from 'react-content-loader'
 
+
+const variants = [
+    "memory-preview-item__variant--red",
+    "memory-preview-item__variant--green",
+    "memory-preview-item__variant--yellow",
+    "memory-preview-item__variant--light-blue",
+    "memory-preview-item__variant--morning-blue",
+    "memory-preview-item__variant--saphire",
+    "memory-preview-item__variant--purple",
+    "memory-preview-item__variant--sliver-pink",
+    "memory-preview-item__variant--yellow2",
+]
+
+let previous = null;
+
+const getVariant = () => {
+    return variants[Math.floor(Math.random() * variants.length)];
+}
+
+const getUniqueVariant = () => {
+    let c = null;
+    while(true){
+        c = variants[Math.floor(Math.random() * variants.length)];
+        if(c!=previous){
+            break;
+        }
+    }
+    previous = c;
+    return c;
+}
+
 const MemoryPreviewItem = ({memory}) => {
+    const [variant] = useState(getUniqueVariant())
+
     return (
-        <div className="memory-preview-item">
+        <div className={`memory-preview-item ${variant}`}>
             <header className="memory-preview-item__header">
                 Memory: <span>{memory.date}</span>
             </header>

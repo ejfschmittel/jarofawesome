@@ -4,6 +4,7 @@
     min-height: 16rem;
     display: flex;
     flex-direction: column;
+ 
 
     &__header{
         background: rgba(0,0,0, 0.5);
@@ -23,8 +24,43 @@
 
         & > div{
             text-align: center;
+            font-weight: 700;
         }
        
+    }
+
+    &__variant{
+        &--red{
+
+        }
+        &--green{
+            background: #7B9E89;
+        }
+
+        &--yellow{
+            background: #E4B363;
+        }
+
+        &--saphire{
+            background: #19647E;
+            color: #fff;
+        }
+        &--purple{
+            background: #8E5572;
+        }
+        &--morning-blue{
+            background: #7B9E89;
+        }
+        &--light-blue{
+            background: #96C5F7;
+        }
+        &--sliver-pink{
+            background: #CEB5A7;
+        }
+        &--yellow2{
+            background: #FA9F42;
+        }
+        
     }
 }
 
