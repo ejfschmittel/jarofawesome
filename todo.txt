@@ -1,13 +1,14 @@
 ordered todo list items
 - add list view my memories 
     - base list view    x
-    - add filtering 
+    - add filtering     
+
+- change date to datetime (but only send date - add seconds automatically)
+
 - add media backend 
 - add media panel fronten ()
 
-- retrigger afte add:
-- add event system (context => ) // write yourself
-- look at sytems others created
+
 
 - how to trigger rerendering on add ?
 - how to handle loading, error, success in react

@@ -5,24 +5,30 @@ from graphene_django import DjangoObjectType
 from random import randint
 from .models import Memory
 
-class MemoryType(DjangoObjectType):
+class MemoryWriteType(DjangoObjectType):
     class Meta:
         model = Memory
-        fields = ('id','memory', 'description', 'date')
+        fields = ('id','memory', 'description', 'datetime')
+
+class MemoryReadType(DjangoObjectType):
+    date = graphene.Date(source='date')
+
+    class Meta:
+        model = Memory
+        fields = ('id', 'memory', 'description')
+
+class MemoryInput(graphene.InputObjectType):
+    id = graphene.UUID(required=True)
+    memory = graphene.String(required=False)
+    description = graphene.String(required=False)
       
 
 class Query(object):
-    memory = graphene.Field(MemoryType, id=graphene.UUID())
+    memory = graphene.Field(MemoryWriteType, id=graphene.UUID())
+    all_memories = graphene.List(MemoryReadType)
+    random_memory = graphene.Field(MemoryReadType)
+    recent_memories = graphene.List(MemoryReadType)
 
-  
-    all_memories = graphene.List(MemoryType)
-    random_memory = graphene.Field(MemoryType)
-    recent_memories = graphene.List(MemoryType)
-
-    @login_required
-    def resolve_all_memories2(self, info, **kwargs):
-        user = user = info.context.user
-        return Memory.objects.filter(user=user)
 
     @login_required
     def resolve_all_memories(self, info, **kwargs):
@@ -32,7 +38,7 @@ class Query(object):
     @login_required
     def resolve_recent_memories(self, info, **kwargs):
         user = user = info.context.user
-        return Memory.objects.filter(user=user).order_by("-date")[:10]
+        return Memory.objects.filter(user=user).order_by("-datetime")[:10]
 
     @login_required
     def resolve_random_memory(self, info, **kwargs):
@@ -49,15 +55,14 @@ class Query(object):
         id = kwargs.get("id")
         if id is not None:
             item = Memory.objects.get(pk=id)
-
-        
+  
         print(user)
         if user and user == item.user:
             return item
         return None
 
 class CreateMemory(graphene.Mutation):
-    memory = graphene.Field(MemoryType)
+    memory = graphene.Field(MemoryReadType)
 
     class Arguments:
         memory = graphene.String(required=True)
@@ -72,13 +77,10 @@ class CreateMemory(graphene.Mutation):
         return CreateMemory(memory=item)
 
 
-class MemoryInput(graphene.InputObjectType):
-    id = graphene.UUID(required=True)
-    memory = graphene.String(required=False)
-    description = graphene.String(required=False)
+
 
 class UpdateMemory(graphene.Mutation):
-    memory = graphene.Field(MemoryType)
+    memory = graphene.Field(MemoryReadType)
 
     class Arguments:
        data = MemoryInput(required=True)
