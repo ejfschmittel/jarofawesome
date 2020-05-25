@@ -8,6 +8,8 @@
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     grid-auto-rows: 1fr;
     gap: 1rem;
+    perspective: 1000px;
+    
     
     &::before {
         content: '';
@@ -24,8 +26,7 @@
       
 
     &__item{
-        background: whitesmoke;
-       
+        background: whitesmoke;  
         border-radius: 1rem;
         box-shadow: 0 .2rem .5rem rgba(0,0,0, .2);
         overflow: hidden;
@@ -33,12 +34,106 @@
    
 }
 
-.image-media{
+.media-item-image{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    
+    transition: all .3s;
+
+
+    &__menu{
+        content: "view";
+        z-index: 1;
+        background: rgba(0,0,0,.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        color: #fff;
+        opacity: 0;
+        transition: all .5s;
+        border-radius: 1rem;
+    }
+
+    &__menu-body{
+        
+    }
+
+    &__menu-svg{
+        width: 6rem;
+    }
+
+    &__logo{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 2rem;
+        transition: all .5s;
+    }
+
+    &:hover &__logo{
+      opacity: 0;
+    }
+
+    &:hover &__menu{
+        opacity: 1;
+    }
+
+    &:hover{
+        transform: translateZ(20px);
+        box-shadow: 0 .3rem .8rem rgba(0,0,0, .2);
+    }
+}
+
+.media-item-editor{
+ 
 }
 
 /*   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat'*/
+
+
+.media-item-editor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+    &__body{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;     
+        input {
+            width: 96%;
+        }
+    }
+
+    &__separator{
+        border: 1px solid #999;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    button{
+        border: 1px solid #999;
+        padding: .3rem .5rem;
+        border-radius: .3rem;
+        cursor: pointer;
+        background: green;
+        color: #fff;
+        box-shadow: 0 .1rem .3rem rgba(0,0,0,.3);
+    }
+}
