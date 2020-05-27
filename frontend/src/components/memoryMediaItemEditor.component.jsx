@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+import {useMutation} from "@apollo/react-hooks"
+import {CREATE_MEMORY_FILE} from "../graphql/memories.schemas"
 
 /*
 
@@ -29,29 +31,62 @@ import React, {useState} from 'react'
 
 */
 
-const MediaItemEditor = () => {
+const MediaItemEditor = ({memoryId}) => {
+
+    const [addMemoryFile, {data, error, loading}] = useMutation(CREATE_MEMORY_FILE)
 
     const [url, setUrl] = useState("")
     const [file, setFile] = useState("")
 
     const onUrlChange = (e) => {
         const urlValue = e.target.value
+        
         setUrl(urlValue)
+        console.log(urlValue)
+      
+
+        // test upload
+
+ 
+        if(urlValue){
+        /*addMemoryFile({
+            variables: {
+                id: memoryId,
+                externalUrl: urlValue
+            }
+        })*/
+        }
+        
+        
 
     }
 
     const onFileChange = (e) => {
-        const urlValue = e.target.value
-        setUrl(urlValue)
+
         setFile(e.target.value)
+    
+ 
+
+        const {target: {validity, files: [file]}} = e
+
+        console.log(validity)
+        console.log(file)
+
+        
+        addMemoryFile({
+            variables: {
+                id: memoryId,
+                file: file
+            }
+        })
     }
 
     const validateLink = (link) => {
-        if(link.includes("youtube") || link.includes("youtu.be")){
+        /**if(link.includes("youtube") || link.includes("youtu.be")){
             // validate youtube link https://www.youtube.com/watch?v=wSdT-SArM2Q&list=PLEoDyqDQJ4rZBzviqgRwjZlvmuoo6i-5E&index=2&t=0s
             const params = new URLSearchParams(link);
             const ytId = params.get("v");
-        }
+        }*/
     }
 
     const clearInputs = () => {

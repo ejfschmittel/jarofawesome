@@ -91,3 +91,23 @@ mutation updateMemory($id:  UUID!, $memory: String){
     }
   }
 `
+
+export const DELETE_MEMORY_FILE = gql`
+    mutation($id: UUID!){
+        deleteMemoryFile(id:$id){
+            ok
+        }
+    } 
+`;
+
+export const CREATE_MEMORY_FILE = gql`
+mutation($id: UUID!, $file: Upload, $externalUrl: String){
+    createMemoryFile(id:$id, file:$file, externalUrl:$externalUrl){
+      memoryFile{
+        id,
+        externalUrl,
+        file
+      }
+    }
+  }
+`;

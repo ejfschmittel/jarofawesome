@@ -10,6 +10,7 @@ from .models import Memory, MemoryFile
 import django_filters
 
 from datetime import date, datetime, time
+from graphene_file_upload.scalars import Upload
 
 
 class MemoryFileType(DjangoObjectType):
@@ -131,6 +132,7 @@ class Query(object):
    
     @login_required
     def resolve_recent_memories(self, info, **kwargs):
+        print("recent memories")
         user = info.context.user
         return Memory.objects.filter(user=user).order_by("-datetime")[:10]
 
@@ -201,7 +203,66 @@ class UpdateMemory(graphene.Mutation):
             return UpdateMemory(memory=memory)
 
 
+
+class CreateMemoryMedia(graphene.Mutation):
+    memoryFile = graphene.Field(MemoryFileType)
+
+    class Arguments:
+        id = graphene.UUID(required=True)
+        external_url = graphene.String(required=False)
+        file = Upload(required=False)
+
+    @login_required
+    def mutate(self, info, **kwargs):
+        user = info.context.user
+
+        print(kwargs.get("id"))
+        memory = Memory.objects.get(pk=kwargs.get("id"))
+        external_url = kwargs.get("external_url")
+        file = kwargs.get("file")
+        print(kwargs)
+        print(kwargs.get("id"))
+
+        print(kwargs.get("file"))
+
+        print(info.context.FILES)
+
+        print(external_url)
+
+        if user and user == memory.user:
+            # check if either file or external url exists
+            memoryFile = MemoryFile.objects.create(
+                external_url=external_url,
+                file=file,
+                memory=memory
+            )
+
+            return CreateMemoryMedia(memoryFile=memoryFile)
+        
+        return None
+
+
+class DeleteMemoryMedia(graphene.Mutation):
+    ok = graphene.Boolean()
+
+    class Arguments:
+        id = graphene.UUID()
+
+    @login_required
+    def mutate(self, info, **kwargs):
+        id = kwargs.get("id")
+        user = info.context.user
+        memoryfile = MemoryFile.objects.get(pk=id)
+        if user and user == memoryfile.memory.user:
+            memoryfile.delete()
+            return DeleteMemoryMedia(ok=True)
+        return DeleteMemoryMedia(ok=False)
+
+
 class Mutation(graphene.ObjectType):
     create_memory = CreateMemory.Field()
     update_memory = UpdateMemory.Field()
+
+    create_memory_file = CreateMemoryMedia.Field()
+    delete_memory_file = DeleteMemoryMedia.Field()
     

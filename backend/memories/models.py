@@ -36,3 +36,14 @@ class MemoryFile(models.Model):
     external_url = models.URLField(max_length=500, null=True, default=None, blank=True)
     file = models.FileField(upload_to=get_unique_file_path, null=True, blank=True)
     memory = models.ForeignKey(to=Memory,related_name="memory_file", on_delete=models.CASCADE)
+
+    def __str__(self):
+        strVal = str(self.id)
+
+        if self.external_url:
+            strVal += " url: " + str(self.external_url)
+
+        if self.file:
+            strVal += " file: " + str(self.file.url)
+
+        return strVal

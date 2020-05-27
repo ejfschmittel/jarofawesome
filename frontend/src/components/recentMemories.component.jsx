@@ -16,6 +16,8 @@ const RecentMemories = () => {
        }
     }, [createdMemory])
 
+    console.log(error)
+
 
 
     return (

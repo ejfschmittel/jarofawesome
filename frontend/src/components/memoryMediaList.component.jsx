@@ -28,7 +28,7 @@ const MemoryMediaList = ({id}) => {
 
     return (
         <div className="media-list">
-            <MediaItemEditor />
+            <MediaItemEditor memoryId={id}/>
             { items.length > 0 ?                            
                 items.map(item => <MemoryMediaItem key={item.id} item={item} /> )
                
