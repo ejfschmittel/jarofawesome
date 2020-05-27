@@ -40,7 +40,7 @@ const DelteMediaItemButton = ({mediaItemId, className}) => {
                 const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId} });
 
                 // remove from array if id matches
-                memoryFiles.filter(file => file.id !== memoryFileId)
+             
                 cache.writeQuery({
                     query: MEMORY_FILES, 
                     variables: {id: memoryId},
