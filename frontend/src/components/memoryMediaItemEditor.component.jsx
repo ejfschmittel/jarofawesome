@@ -39,45 +39,34 @@ const MediaItemEditor = ({memoryId}) => {
     const [file, setFile] = useState("")
 
     const onUrlChange = (e) => {
-        const urlValue = e.target.value
-        
+        const urlValue = e.target.value 
         setUrl(urlValue)
         console.log(urlValue)
-      
 
-        // test upload
-
- 
         if(urlValue){
-        /*addMemoryFile({
-            variables: {
+            addMemoryFileCall( {
                 id: memoryId,
                 externalUrl: urlValue
-            }
-        })*/
+            })
         }
-        
-        
-
     }
 
     const onFileChange = (e) => {
-
         setFile(e.target.value)
-    
- 
-
         const {target: {validity, files: [file]}} = e
 
         console.log(validity)
         console.log(file)
 
-        
+        addMemoryFileCall({
+            id: memoryId,
+            file: file
+        })
+    }
+
+    const addMemoryFileCall = (variables) => {
         addMemoryFile({
-            variables: {
-                id: memoryId,
-                file: file
-            },
+            variables: variables,
             update: (cache, {data: {createMemoryFile}}) => {          
                 const {memoryFile} = createMemoryFile
                 const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId} });
@@ -93,18 +82,7 @@ const MediaItemEditor = ({memoryId}) => {
         })
     }
 
-    const validateLink = (link) => {
-        /**if(link.includes("youtube") || link.includes("youtu.be")){
-            // validate youtube link https://www.youtube.com/watch?v=wSdT-SArM2Q&list=PLEoDyqDQJ4rZBzviqgRwjZlvmuoo6i-5E&index=2&t=0s
-            const params = new URLSearchParams(link);
-            const ytId = params.get("v");
-        }*/
-    }
 
-    const clearInputs = () => {
-        setUrl("")
-        setFile("")
-    }
 
 
 

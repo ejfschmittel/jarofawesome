@@ -36,11 +36,19 @@ class Memory(models.Model):
 
 # cleaning filetypes https://stackoverflow.com/questions/4853581/django-get-uploaded-file-type-mimetype
 
+MEDIA_TYPES = [
+    ('audio', 'audio'),
+    ('video', 'video'),
+    ('image', 'image'),
+    ('youtube', 'youtube')
+]
+
 class MemoryFile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     external_url = models.URLField(max_length=500, null=True, default=None, blank=True)
     file = models.FileField(upload_to=get_unique_file_path, null=True, blank=True)
     memory = models.ForeignKey(to=Memory,related_name="memory_file", on_delete=models.CASCADE)
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPES)
 
     def __str__(self):
         strVal = str(self.id)
