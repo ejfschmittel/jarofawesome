@@ -95,7 +95,9 @@ mutation updateMemory($id:  UUID!, $memory: String){
 export const DELETE_MEMORY_FILE = gql`
     mutation($id: UUID!){
         deleteMemoryFile(id:$id){
-            ok
+            ok,
+            memoryId,
+            memoryFileId
         }
     } 
 `;

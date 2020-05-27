@@ -244,6 +244,8 @@ class CreateMemoryMedia(graphene.Mutation):
 
 class DeleteMemoryMedia(graphene.Mutation):
     ok = graphene.Boolean()
+    memory_id = graphene.UUID()
+    memory_file_id = graphene.UUID()
 
     class Arguments:
         id = graphene.UUID()
@@ -253,10 +255,12 @@ class DeleteMemoryMedia(graphene.Mutation):
         id = kwargs.get("id")
         user = info.context.user
         memoryfile = MemoryFile.objects.get(pk=id)
+        memory_id = memoryfile.memory.id
+
         if user and user == memoryfile.memory.user:
             memoryfile.delete()
-            return DeleteMemoryMedia(ok=True)
-        return DeleteMemoryMedia(ok=False)
+            return DeleteMemoryMedia(ok=True, memory_id=memory_id, memory_file_id=id)
+        return DeleteMemoryMedia(ok=False, memory_id=memory_id, memory_file_id=id)
 
 
 class Mutation(graphene.ObjectType):
