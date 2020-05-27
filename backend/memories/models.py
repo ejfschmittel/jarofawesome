@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-import uuid
 from django.utils.timezone import now
+from django.dispatch import receiver
+import uuid
 import os
 
 User = get_user_model()
@@ -29,6 +30,10 @@ class Memory(models.Model):
     def __str__(self):
         return self.user.username + ": " + self.memory
 
+
+
+
+
 # cleaning filetypes https://stackoverflow.com/questions/4853581/django-get-uploaded-file-type-mimetype
 
 class MemoryFile(models.Model):
@@ -47,3 +52,11 @@ class MemoryFile(models.Model):
             strVal += " file: " + str(self.file.url)
 
         return strVal
+
+
+@receiver(models.signals.post_delete, sender=MemoryFile)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    if instance.file:
+        if os.path.isfile(instance.file.path):
+            os.remove(instance.file.path)
+
