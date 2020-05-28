@@ -1,0 +1,107 @@
+.media-item{
+    position: relative;
+    background: whitesmoke;  
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover{       
+        transform: translateZ(20px);
+        box-shadow: 0 .3rem .8rem rgba(0,0,0, .2);
+    }
+    
+
+    &::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.5);
+        opacity: 0;
+        transition: all .5s;
+        border-radius: 1rem;
+    }
+
+    &__body{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__body-icon{
+        width: 6rem;
+        z-index: 5;
+        opacity: 0;
+        transition: .5s all;
+    }
+
+    &__mini-icon{
+        position: absolute;
+        width: 2rem;
+        top: 1rem;
+        right: 1rem;
+        transition: all .5s;
+    }
+
+    &--image{
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &--youtube{
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+   
+    &__delete-btn{
+        background: var(--secondary-color);
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: .2rem .6rem;
+        border: 1px solid var(--white-1);
+        border-radius: .4rem;
+        color: var(--white-1);
+        opacity: 0;
+        z-index: 5;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 .2rem .5rem rgba(#FFFcFa, .5);
+        transition: all .4s;
+        outline: none;
+
+        &:hover{
+            box-shadow: 0  .1rem .8rem rgba(#FFFcFa, .8);
+        }
+
+        &:active{
+            box-shadow: 0  .1rem .4rem rgba(#FFFcFa, .8);
+        }
+    }
+
+    &:hover &__body-icon{
+        opacity: 1;
+        transform: scale(1.06);
+    }
+
+    &:hover &__delete-btn{
+        opacity: 1;
+    }
+
+    &:hover &__mini-icon{
+        opacity: 0;
+    }
+
+    &:hover::before{
+        opacity: 1;
+    }
+
+}

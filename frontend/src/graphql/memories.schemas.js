@@ -60,7 +60,8 @@ export const MEMORY_FILES = gql`
         memoryFiles(id: $id){
         id,
         file,
-        externalUrl
+        externalUrl,
+        mediaType
         }
     }
 `;
@@ -108,7 +109,8 @@ mutation($id: UUID!, $file: Upload, $externalUrl: String){
       memoryFile{
         id,
         externalUrl,
-        file
+        file,
+        mediaType
       }
     }
   }

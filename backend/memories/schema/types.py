@@ -13,7 +13,7 @@ TODO:
 class MemoryFileType(DjangoObjectType):
     class Meta:
         model = MemoryFile
-        fields = ('id', 'file', 'external_url')
+        fields = ('id', 'file', 'external_url', 'media_type')
 
     def resolve_file(self, info):
         print(self)

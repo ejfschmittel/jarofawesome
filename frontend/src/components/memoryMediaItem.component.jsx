@@ -1,8 +1,9 @@
 import React from 'react'
 
-import ImageMediaItem from "./memoryMediaItemImage.component"
-import AudioMediaItem from "./memoryMediaItemAudio.component"
-import VideoMediaItem from "./memoryMediaItemVideo.component"
+import MediaItemImage from "./MediaItemImage.component"
+import MediaItemYoutube from "./MediaItemYoutube.component"
+
+import MediaItemDeleteButton from "./MediaItemDeleteButton.component"
 
 /* 
     central media item wrapper for image, video & audio
@@ -14,29 +15,30 @@ const MemoryMediaItem = ({item}) => {
 
     //const path = item.file ? item.file : item.externalUrl
 
-    let override = "image"
 
-    if(item.id == "47070804-cc33-448b-acb3-01b4c0239490"){
-        override ="video"
-    }
-   
-    switch(override){
-        case "image":
-            return <ImageMediaItem item={item}/>
-        case "video":
-            return <VideoMediaItem item={item} />
-        case "audio":
-            return <AudioMediaItem item={item} /> 
-        default:
-            return null;
-    }
-    
 
-    /*return (
-        <div className="media-list__item image-media" style={{backgroundImage:  `url(${path})` }}>
-            
+    const getMediaItemComponent = (item) => {
+        switch(item.mediaType){
+            case "IMAGE":
+                return MediaItemImage 
+            case "YOUTUBE":
+                return MediaItemYoutube 
+        
+            default:
+                return null;
+        }
+    }
+
+    const MediaItemBody = getMediaItemComponent(item)
+    if(!MediaItemBody) return null
+
+
+    return (
+        <div className="media-list__item media-item">
+            <MediaItemBody item={item}/>
+           <MediaItemDeleteButton className="media-item__delete-btn" mediaItemId={item.id}/>
         </div>
-    )*/
+    )
 }
 
 export default MemoryMediaItem

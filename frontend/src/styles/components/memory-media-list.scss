@@ -26,112 +26,14 @@
       
 
     &__item{
-        background: whitesmoke;  
-        border-radius: 1rem;
         box-shadow: 0 .2rem .5rem rgba(0,0,0, .2);
         overflow: hidden;
+        background: whitesmoke;  
     }
    
 }
 
-.media-item-image{
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
 
-    
-    transition: all .3s;
-
-    &__delete-btn{
-        background: var(--secondary-color);
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        padding: .2rem .6rem;
-        border: 1px solid var(--white-1);
-        border-radius: .4rem;
-        color: var(--white-1);
-        opacity: 0;
-        z-index: 5;
-        cursor: pointer;
-        font-weight: bold;
-        box-shadow: 0 .2rem .5rem rgba(#FFFcFa, .5);
-        transition: all .4s;
-        outline: none;
-
-        &:hover{
-            box-shadow: 0  .1rem .8rem rgba(#FFFcFa, .8);
-        }
-
-        &:active{
-            box-shadow: 0  .1rem .4rem rgba(#FFFcFa, .8);
-        }
-    }
-
-
-   
-
-
-
-    &__menu{
-        content: "view";
-        z-index: 1;
-        background: rgba(0,0,0,.5);
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.6rem;
-        color: #fff;
-        opacity: 0;
-        transition: all .5s;
-        border-radius: 1rem;
-    }
-
-    &__menu-body{
-        
-    }
-
-    &__menu-svg{
-        width: 6rem;
-    }
-
-    &__logo{
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 2rem;
-        transition: all .5s;
-    }
-
-    &:hover &__logo{
-      opacity: 0;
-    }
-
-    &:hover &__menu{
-        opacity: 1;
-    }
-
-    &:hover &__delete-btn{
-        opacity: 1;
-    }
-
-    &:hover{
-        transform: translateZ(20px);
-        box-shadow: 0 .3rem .8rem rgba(0,0,0, .2);
-    }
-}
-
-.media-item-editor{
- 
-}
 
 /*   backgroundPosition: 'center',
   backgroundSize: 'cover',
