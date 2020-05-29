@@ -2,6 +2,9 @@ import React, {useContext, useState, useEffect} from 'react'
 
 
 import MediaOverlayContext from "../contexts/mediaOverlay.context"
+import {ReactComponent as Logo} from "../svgs/test.svg"
+
+import {ReactComponent as CloseLogo} from "../svgs/exit2.svg"
 
 const MediaOverlay = ({items}) => {
     const {isVisible, setIsVisible,hideOverlay, currentItem, moveLeft, moveRight} = useContext(MediaOverlayContext)
@@ -22,12 +25,15 @@ const MediaOverlay = ({items}) => {
     return (
         <div className={classes}>
             <div className="media-overlay__body">
-                <div className="media-overlay__nav-left" onClick={moveLeft}></div>
+               
+                <Logo className="media-overlay__nav-left" onClick={moveLeft}/>
                 <MediaOverlayItem item={item} />
                
-                <div className="media-overlay__nav-right" onClick={moveRight}></div>
+               
+                <Logo className="media-overlay__nav-right" onClick={moveRight}/>
             </div>
-            <button className="media-overlay__close" onClick={hideOverlay}>X</button>
+            <CloseLogo  className="media-overlay__close" onClick={hideOverlay} />
+            
         </div>
     )
 }
@@ -77,6 +83,9 @@ const MediaOverlayYoutubeItem = ({item}) => {
 
     return (
         <div className="media-overlay__item--youtube">
+            <div>
+                Loading...
+            </div>
             <iframe src={embedUrl} frameBorder="0" allo="autoplay;encrypted-media"></iframe>
         </div>
     )

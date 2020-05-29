@@ -4,13 +4,14 @@ import React, {useState} from 'react'
 const MediaOverlayContext = React.createContext({})
 
 export const MediaOverlayContextProvider = ({children}) => {
-    const [isVisible, setIsVisible] = useState(true)
+    const [isVisible, setIsVisible] = useState(false)
     const [currentItem, setCurrentItem] = useState(0)
 
 
 
     const hideOverlay = () => {
         setIsVisible(false)
+        setCurrentItem(-1)
 
         // disable all youtube videos
         var iframes = document.getElementsByTagName("iframe");

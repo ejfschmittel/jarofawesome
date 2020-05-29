@@ -1,3 +1,22 @@
+@mixin overlay-navigation-button {
+    width: 8rem;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;  
+
+    border-radius: 50%;
+    box-shadow: 0 .2rem .5rem rgba(0,0,0,.5);
+    transition: .3s all;
+
+    &:hover{
+        box-shadow:  0 .2rem .5rem rgba(200,200,200,.5);
+    }
+
+    &:active{
+        box-shadow:  0 .1rem .3rem rgba(200,200,200,.5);
+    }
+}
+
 .media-overlay{
     position: fixed;
     background: rgba(0,0,0,.5); 
@@ -13,43 +32,53 @@
         width: 100%;
         display: flex;
         justify-content: center;
+       
+        padding: 1rem 0;
+        
     }
    
 
     &__close{
         position: absolute;
-        top: 5rem;
-        right: 5rem;
-        padding: .3rem .5rem;
+        width: 4rem;
+        fill: #fefefe;
+        
+        top: 2rem;
+        right: 6rem;
+       
         cursor: pointer;
+        transition: all .3s;
+        border-radius: 50%;
+        box-shadow: 0 .1rem .4rem rgba(0 ,0,0,.3);
+      
+
+        &:hover{
+            box-shadow: 0 .2rem 2rem .5rem rgba(200,200,200,.5);
+        }
+
+        &:active{
+            box-shadow: 0 .2rem 2rem .5rem rgba(0,0,0,.3);
+        }
+        
     }
 
-    &__nav-left{
-        height: 50%;
-        width: 5rem;
-        background: #fff;
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
+    &__nav-left{      
+        @include overlay-navigation-button();
+        left: 4rem; 
+        transform: translateY(-50%) scaleX(-1);  
     }
 
     &__nav-right{
-        height: 50%;
-        width: 5rem;
-        background: #fff;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
+        @include overlay-navigation-button();
+        right: 4rem;
         transform: translateY(-50%);
-        cursor: pointer;
     }
 
     &__item--img{
+        user-select: none;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
 
         img{
             display: block;
@@ -62,8 +91,17 @@
     &__item--youtube{
         position: relative;
         width: 80%;
-        padding-bottom: 56.25%;
+        padding-bottom: 45%;
         height: 0;
+        background: whitesmoke;
+      
+
+        & > div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
         
         iframe{
             position: absolute;
