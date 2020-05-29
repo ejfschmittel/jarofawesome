@@ -3,11 +3,15 @@ import {useLazyQuery} from "@apollo/react-hooks"
 import MemoryMediaItem from "./memoryMediaItem.component"
 import MediaItemEditor from "./memoryMediaItemEditor.component"
 
+import MediaOverlay from "./MediaOverlay.component"
+import {MediaOverlayContextProvider} from "../contexts/mediaOverlay.context"
+
 import {MEMORY_FILES} from "../graphql/memories.schemas"
+
+
 
 const MemoryMediaList = ({id}) => {
     const [items, setItems] = useState([])
-
     const[getMemoryFiles,{data, error, loading}] = useLazyQuery(MEMORY_FILES)
 
     useEffect(() => {
@@ -27,25 +31,20 @@ const MemoryMediaList = ({id}) => {
     }, [data])
 
     return (
-        <div className="media-list">
-            <MediaItemEditor memoryId={id}/>
-            { items.length > 0 ?                            
-                items.map(item => <MemoryMediaItem key={item.id} item={item} /> )
-               
-            : "No items yet"}
-        </div>
+        <MediaOverlayContextProvider>
+            <div className="media-list">
+                <MediaItemEditor memoryId={id}/>
+                { items.length > 0 ?                            
+                    items.map((item, index) => <MemoryMediaItem key={item.id} item={item} index={index}/> )
+                
+                : "No items yet"}
+                
+            </div>
+            <MediaOverlay items={items} />
+        </MediaOverlayContextProvider>
+ 
     )
 }
 
-/*const MemoryMediaItem = ({item}) => {
-
-    const path = item.file ? item.file : item.externalUrl
-
-    return (
-        <div className="media-list__item image-media" style={{backgroundImage:  `url(${path})` }}>
-            
-        </div>
-    )
-}*/
 
 export default MemoryMediaList

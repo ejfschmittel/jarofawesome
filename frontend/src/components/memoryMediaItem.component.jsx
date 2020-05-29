@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import MediaItemImage from "./MediaItemImage.component"
 import MediaItemYoutube from "./MediaItemYoutube.component"
 
 import MediaItemDeleteButton from "./MediaItemDeleteButton.component"
+
+import MediaOverlayContext from "../contexts/mediaOverlay.context"
 
 /* 
     central media item wrapper for image, video & audio
@@ -11,8 +13,8 @@ import MediaItemDeleteButton from "./MediaItemDeleteButton.component"
 */
 
 
-const MemoryMediaItem = ({item}) => {
-
+const MemoryMediaItem = ({item, index}) => {
+    const {setItemAndShow} = useContext(MediaOverlayContext)
     //const path = item.file ? item.file : item.externalUrl
 
 
@@ -33,8 +35,12 @@ const MemoryMediaItem = ({item}) => {
     if(!MediaItemBody) return null
 
 
+    const showMediaOverlay = () => {
+        setItemAndShow(index)
+    }
+
     return (
-        <div className="media-list__item media-item">
+        <div className="media-list__item media-item" onClick={showMediaOverlay}>
             <MediaItemBody item={item}/>
            <MediaItemDeleteButton className="media-item__delete-btn" mediaItemId={item.id}/>
         </div>
