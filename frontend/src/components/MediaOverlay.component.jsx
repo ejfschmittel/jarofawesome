@@ -19,13 +19,15 @@ const MediaOverlay = ({items}) => {
     }, [currentItem, items])
 
 
-    const moveRightBounded = () => {
+    const moveRightBounded = (e) => {
+        e.stopPropagation();
         if(canMoveRight){
             moveRight()
         }
     }
 
-    const moveLeftBounded = () => {
+    const moveLeftBounded = (e) => {
+        e.stopPropagation();
         if(canMoveLeft){
             moveLeft()
         }
@@ -36,14 +38,14 @@ const MediaOverlay = ({items}) => {
 
 
     const classes = `media-overlay ${isVisible ? ' media-overlay--is-visible' : ''}`;
-    console.log(item)
+ 
     return (
-        <div className={classes}>
-            <div className="media-overlay__body">
+        <div className={classes} onClick={() => hideOverlay()}>
+            <div className="media-overlay__body" >
                 <div className={`media-overlay__nav media-overlay__nav--left ${!canMoveLeft && 'media-overlay__nav--disabled'}`}>
                     <Logo className="media-overlay__nav-btn" onClick={moveLeftBounded}/>
                 </div>
-                <MediaOverlayItem item={item} />   
+                <MediaOverlayItem item={item} i/>   
                 <div className={`media-overlay__nav media-overlay__nav--right ${!canMoveRight && 'media-overlay__nav--disabled'}`}>
                     <Logo className="media-overlay__nav-btn" onClick={moveRightBounded}/>
                 </div>
