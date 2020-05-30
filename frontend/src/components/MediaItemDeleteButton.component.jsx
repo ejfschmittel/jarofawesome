@@ -8,19 +8,20 @@ const DelteMediaItemButton = ({mediaItemId, className}) => {
     const [delteMemoryFile, {data, loading, error}] = useMutation(DELETE_MEMORY_FILE)
 
     const deleteMediaItem = (e) => {
+        e.stopPropagation()
         delteMemoryFile({
             variables: {
                 id: mediaItemId
             },
             update: (cache, {data: {deleteMemoryFile}}) => {
                 const {memoryId, memoryFileId} = deleteMemoryFile
-                const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId} });
+                const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId, hashKey: null} });
 
                 // remove from array if id matches
              
                 cache.writeQuery({
                     query: MEMORY_FILES, 
-                    variables: {id: memoryId},
+                    variables: {id: memoryId, hashKey:null},
                     data: {memoryFiles: memoryFiles.filter(file => file.id !== memoryFileId)}
                 })
             }
