@@ -67,17 +67,15 @@ const MediaItemEditor = ({memoryId}) => {
     const addMemoryFileCall = (variables) => {
         addMemoryFile({
             variables: variables,
-            update: (cache, {data: {createMemoryFile}}) => {          
+            update: (cache, {data: {createMemoryFile}}) => {  
                 const {memoryFile} = createMemoryFile
-                const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId} });
+                const {memoryFiles} = cache.readQuery({ query: MEMORY_FILES, variables: {id: memoryId, hashKey: null} });
 
-                // remove from array if id matches
-                
-               cache.writeQuery({
-                    query: MEMORY_FILES, 
-                    variables: {id: memoryId},
-                    data: {memoryFiles: memoryFiles.concat([memoryFile])}
-                })
+                cache.writeQuery({
+                        query: MEMORY_FILES, 
+                        variables: {id: memoryId, hashKey: null},
+                        data: {memoryFiles: memoryFiles.concat([memoryFile])}
+                 })
             }
         })
     }

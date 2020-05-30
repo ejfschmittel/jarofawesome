@@ -101,7 +101,7 @@ mutation updateMemory($id:  UUID!, $memory: String){
       }
     }
   }
-`
+`;
 
 export const DELETE_MEMORY_FILE = gql`
     mutation($id: UUID!){
@@ -142,6 +142,7 @@ mutation($memoryId: UUID!){
   }
 `;
 
+
 export const RESOLVE_SHARE_LINK = gql`
 query($hashKey: String!){
     memoryShareLinkResolve(hashKey:$hashKey){
@@ -152,4 +153,4 @@ query($hashKey: String!){
       }
     }
   }
-`
+`;
