@@ -13,6 +13,15 @@ export const createMemorySchema = gql`
     }
 `;
 
+export const DELETE_MEMORY = gql`
+    mutation delteMemory($id:UUID!){
+        deleteMemory(id: $id){
+            ok,
+            memoryId
+        }
+    }
+`;
+
 export const RECENT_MEMORIES = gql`
     query{
         recentMemories{
@@ -71,6 +80,7 @@ export const MY_MEMORIES = gql`
         allMemories(s:$s, fromDate:$fromDate, toDate:$toDate, orderBy: $orderBy){
             edges{
                 node{
+                    pk,
                     id,
                     memory,
                     date,

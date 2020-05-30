@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
-import {useParams, useLocation} from "react-router-dom"
+import {useParams, useLocation, useHistory} from "react-router-dom"
 import {useQuery, useMutation} from "@apollo/react-hooks"
-import {GET_MEMORY, UPDATE_MEMORY} from "../graphql/memories.schemas"
+import {GET_MEMORY, UPDATE_MEMORY, DELETE_MEMORY, RECENT_MEMORIES} from "../graphql/memories.schemas"
 
 import MemoryMediaList from "../components/memoryMediaList.component"
 
@@ -80,6 +80,7 @@ const useSearchParams = () => {
 
 const MemoryDetailPage = () => {
     const searchQuery = useSearchParams()
+    const history = useHistory()
     const hashKey= searchQuery.get("key")
     const {memoryid} = useParams()
 
@@ -101,6 +102,7 @@ const MemoryDetailPage = () => {
 
 
     const [updateMemory] = useMutation(UPDATE_MEMORY)
+    const [deleteMemory] = useMutation(DELETE_MEMORY)
 
    
     console.log(data)
@@ -124,6 +126,22 @@ const MemoryDetailPage = () => {
         return {}
     }
 
+    const onDelete = async (e) => {
+        e.preventDefault();
+   
+        try{
+            const res = await deleteMemory({
+                variables: {id: memoryid},
+                update: (cache, {data: {deleteMemory}}) => {
+                    /* update after delte*/
+                }
+            })
+            history.push(`/memories/`)
+        }catch(e){
+            console.log(e)
+        }
+    }
+
     return (
         <main>
             <div className="container">
@@ -139,8 +157,15 @@ const MemoryDetailPage = () => {
                            
                         </h1>
 
-                        <div>
+
+                        <div className="memory-details__options">
                             <MemoryShareButton memoryId={memory ? memory.id : null}/>
+               
+
+                    
+                            <button  className="memory-details__delete-btn" onClick={onDelete}>
+                                Delete
+                            </button>               
                         </div>
 
 

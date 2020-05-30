@@ -27,6 +27,25 @@ class CreateMemory(graphene.Mutation):
         )
         return CreateMemory(memory=item)
 
+class DeleteMemory(graphene.Mutation):
+    ok = graphene.Boolean()
+    memory_id = graphene.UUID()
+
+    class Arguments:
+        id = graphene.UUID(required=True)
+    
+    @login_required
+    def mutate(self, info, id):
+        user = info.context.user
+        memory = Memory.objects.get(pk=id)
+        memory_id = memory.id
+
+        if memory and memory.user == user:
+            memory.delete()
+            return DeleteMemory(ok=True, memory_id=memory_id)
+
+        return CreateMemory(ok=False)
+
 class UpdateMemory(graphene.Mutation):
     memory = graphene.Field(MemoryReadType)
 

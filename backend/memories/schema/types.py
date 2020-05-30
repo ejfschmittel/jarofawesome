@@ -49,6 +49,7 @@ class MemoryReadType(DjangoObjectType):
 
 class MemoryNode(DjangoObjectType):
     date = graphene.Date(source='date')
+    pk = graphene.UUID(source='pk')
 
     class Meta:
         model = Memory

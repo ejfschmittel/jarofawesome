@@ -68,7 +68,7 @@ const MyMemories = () => {
     // parse incoming data to fit form
     useEffect(() => {
         if(data && data.allMemories){
-            setMyMemories(data.allMemories.edges.map(node => node.node))
+            setMyMemories(data.allMemories.edges.map(node => ({...node.node, id: node.node.pk, gid: node.node.id})))
         }
     }, [data])
 

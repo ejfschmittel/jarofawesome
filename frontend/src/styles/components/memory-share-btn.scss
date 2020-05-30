@@ -4,7 +4,7 @@
 
 
     &__body{
-        background: green;
+        background: var(--thirtiary-color);
         display: flex;
         flex-direction: column;
         border-radius: .5rem;
@@ -72,7 +72,7 @@
         left: 0;
         bottom: 0;
         right: 0;
-        background: green;
+        background: var(--thirtiary-color);
         color: #fff;
         display: flex;
         justify-content: center;

@@ -15,8 +15,7 @@ const MemoryMediaList = ({id, hashKey}) => {
     const[getMemoryFiles,{data, error, loading}] = useLazyQuery(MEMORY_FILES)
 
     useEffect(() => {
-        console.log(id)
-        console.log(hashKey)
+
         if(id){
             console.log("make media list request")
             getMemoryFiles({

@@ -6,4 +6,20 @@
         font-size: 2.2srem;
         font-weight: 600;
     }
+
+    &__options{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__delete-btn{
+        background: var(--secondary-color);
+        border-radius: .3rem;
+        border: none;
+        color: #fff;
+        min-width: 20rem;
+        box-shadow: 0 .2rem .5rem rgba(0,0,0,.3);
+        outline: none;
+        cursor: pointer;
+    }
 }
