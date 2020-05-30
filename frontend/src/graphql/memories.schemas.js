@@ -26,8 +26,8 @@ export const RECENT_MEMORIES = gql`
 
 
 export const GET_MEMORY = gql`
-    query($id: UUID!){
-        memory(id:$id){
+    query($id: UUID!, $hashKey: String){
+        memory(id:$id, hashKey:$hashKey){
             id,
             memory,
             date
@@ -56,12 +56,12 @@ export const ALL_MEMORIES = gql`
 `;
 
 export const MEMORY_FILES = gql`
-    query memoryFiles($id: UUID!){
-        memoryFiles(id: $id){
-        id,
-        file,
-        externalUrl,
-        mediaType
+    query memoryFiles($id: UUID!, $hashKey: String){
+        memoryFiles(id: $id, hashKey: $hashKey){
+            id,
+            file,
+            externalUrl,
+            mediaType
         }
     }
 `;
@@ -115,3 +115,31 @@ mutation($id: UUID!, $file: Upload, $externalUrl: String){
     }
   }
 `;
+
+export const GET_OR_CREATE_SHARE_LINK = gql`
+mutation($memoryId: UUID!){
+    getOrCreateShareLink(memoryId:$memoryId){
+      memoryShareLink{
+        id,
+        hashKey,
+        clicks,
+        memory{
+          id
+        },
+        createdAt
+      }
+    }
+  }
+`;
+
+export const RESOLVE_SHARE_LINK = gql`
+query($hashKey: String!){
+    memoryShareLinkResolve(hashKey:$hashKey){
+      memoryId,
+      memoryShareLink{
+        id,
+        hashKey
+      }
+    }
+  }
+`

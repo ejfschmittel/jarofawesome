@@ -10,19 +10,23 @@ import {MEMORY_FILES} from "../graphql/memories.schemas"
 
 
 
-const MemoryMediaList = ({id}) => {
+const MemoryMediaList = ({id, hashKey}) => {
     const [items, setItems] = useState([])
     const[getMemoryFiles,{data, error, loading}] = useLazyQuery(MEMORY_FILES)
 
     useEffect(() => {
+        console.log(id)
+        console.log(hashKey)
         if(id){
+            console.log("make media list request")
             getMemoryFiles({
                 variables: {
-                    id
+                    id,
+                    hashKey
                 }
             })
         }
-    }, [id])
+    }, [id, hashKey])
 
     useEffect(() => {
         if(data){

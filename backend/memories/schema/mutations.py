@@ -3,8 +3,8 @@ from graphene_file_upload.scalars import Upload
 from graphql_jwt.decorators import login_required
 from django.core.exceptions import ValidationError
 
-from ..models import Memory, MemoryFile
-from .types import MemoryReadType, MemoryFileType
+from ..models import Memory, MemoryFile, MemoryShareLink
+from .types import MemoryReadType, MemoryFileType, MemoryShareLinkType
 from .inputs import MemoryInput
 
 from ..utils.exteral_url_validator import validate_external_url
@@ -139,3 +139,20 @@ class DeleteMemoryMedia(graphene.Mutation):
             memoryfile.delete()
             return DeleteMemoryMedia(ok=True, memory_id=memory_id, memory_file_id=id)
         return DeleteMemoryMedia(ok=False, memory_id=memory_id, memory_file_id=id)
+
+
+class GetOrCreateShareLink(graphene.Mutation):
+    memory_share_link = graphene.Field(MemoryShareLinkType)
+
+    class Arguments:
+        memory_id = graphene.UUID()
+
+    @login_required
+    def mutate(self, info, memory_id):
+        user = info.context.user
+        
+        memory = Memory.objects.get(pk=memory_id)
+        if memory and user and user == memory.user:
+            obj, created = MemoryShareLink.objects.get_or_create(memory=memory)
+            return GetOrCreateShareLink(memory_share_link=obj)
+        return GetOrCreateShareLink()

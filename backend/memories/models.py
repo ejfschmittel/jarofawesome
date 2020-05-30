@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from django.utils.timezone import now
 from django.dispatch import receiver
 import uuid
+import string   
+from secrets import token_urlsafe
+import random
 import os
 
 User = get_user_model()
@@ -68,3 +71,39 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if os.path.isfile(instance.file.path):
             os.remove(instance.file.path)
 
+
+
+
+class MemoryShareLink(models.Model): 
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    hash_key =  models.CharField(unique=True, max_length=11)
+    memory = models.OneToOneField(to=Memory,related_name="memory_share_link", on_delete=models.CASCADE)
+    clicks = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def clicked(self):
+        self.clicks += 1;
+        self.save()
+
+    def random_choice(self):
+        alphabet = string.ascii_lowercase + string.digits
+        return ''.join(random.choices(alphabet, k=8))
+
+    # override save and create short hash
+
+
+    def save(self, *args, **kwargs):
+        if not self.hash_key:
+            random_hash = get_random_hash(self)
+            self.hash_key = random_hash
+
+        return super().save(*args, **kwargs)
+
+
+def get_random_hash(instance):
+    print("hello mello")
+    random_string = token_urlsafe(11)
+    qs_exists = MemoryShareLink.objects.filter(hash_key=random_string).exists()
+    if qs_exists:
+        return get_random_hash(instance)
+    return random_string

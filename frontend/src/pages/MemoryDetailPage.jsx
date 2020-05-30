@@ -1,10 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react'
-import {useParams} from "react-router-dom"
+import {useParams, useLocation} from "react-router-dom"
 import {useQuery, useMutation} from "@apollo/react-hooks"
 import {GET_MEMORY, UPDATE_MEMORY} from "../graphql/memories.schemas"
 
 import MemoryMediaList from "../components/memoryMediaList.component"
 
+import MemoryShareButton from "../components/memoryShareButton.component"
 
 const Spinner = ({height, width}) => {
     return (
@@ -71,11 +72,22 @@ const EditableField = ({children, onUpdate, value, ...other}) => {
     )
 }
 
+const useSearchParams = () => {
+    const {search} = useLocation()    
+    const query = new URLSearchParams(search);
+    return query;
+}
+
 const MemoryDetailPage = () => {
+    const searchQuery = useSearchParams()
+    const hashKey= searchQuery.get("key")
     const {memoryid} = useParams()
+
+
     const {loading, data, error} = useQuery(GET_MEMORY, {
         variables: {
-            id: memoryid
+            id: memoryid,
+            hashKey
         }
     })
 
@@ -106,14 +118,9 @@ const MemoryDetailPage = () => {
                     memory: internalValue
                 }
             })
-
-            console.log(res)
         }catch(e){
             console.log(e)
         }
-         
-       
-
         return {}
     }
 
@@ -132,12 +139,13 @@ const MemoryDetailPage = () => {
                            
                         </h1>
 
+                        <div>
+                            <MemoryShareButton memoryId={memory ? memory.id : null}/>
+                        </div>
 
-                        <MemoryMediaList id={memory ? memory.id : null} />
-                     
-                 
-                </div>
-               
+
+                        <MemoryMediaList id={memory ? memory.id : null} hashKey={hashKey} />    
+                </div>             
             </div>
         </main>
     )

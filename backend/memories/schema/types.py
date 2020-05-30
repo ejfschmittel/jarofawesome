@@ -1,7 +1,7 @@
 import graphene 
 from graphene_django import DjangoObjectType
 
-from ..models import Memory, MemoryFile
+from ..models import Memory, MemoryFile, MemoryShareLink
 
 '''
 TODO: 
@@ -21,6 +21,16 @@ class MemoryFileType(DjangoObjectType):
             return "http://127.0.0.1:8000" + self.file.url 
         return ""
 
+
+
+class MemoryShareLinkType(DjangoObjectType):
+    class Meta:
+        model = MemoryShareLink
+        fields = ('id', 'created_at','clicks', 'memory', 'hash_key')
+
+class MemoryLinkUrlType(graphene.ObjectType):
+    memory_id = graphene.UUID()
+    memory_share_link = graphene.Field(MemoryShareLinkType)
 
 class MemoryWriteType(DjangoObjectType):
     class Meta:

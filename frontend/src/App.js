@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import MyMemoriesPage from "./pages/MyMemoriesPage";
+import MemoryShareRedirectPage from "./pages/MemoryShareRedirectPage"
 
 import MemoryDetail from "./pages/MemoryDetailPage"
 
@@ -28,7 +29,7 @@ function App() {
           <Route path="/login" component={LoginPage} />
           <Route path="/memories" component={MyMemoriesPage} exact={true} />
           <Route path="/memories/:memoryid" component={MemoryDetail} />
-      
+          <Route path="/m/:shareHash" component={MemoryShareRedirectPage} />
         </Switch>
       </Router>
       
