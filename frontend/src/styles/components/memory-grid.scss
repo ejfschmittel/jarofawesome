@@ -2,9 +2,13 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    perspective: 1000px;
+    
+    
 
-    & > *{
+    & > div{
         // handle child elements
+      
     }
 }
 

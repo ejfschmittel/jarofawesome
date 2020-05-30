@@ -4,8 +4,17 @@
     min-height: 16rem;
     display: flex;
     flex-direction: column;
- 
+    position: relative;
+    overflow: hidden;
 
+    &__link-wrapper{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0; 
+    }
     &__header{
         background: rgba(0,0,0, 0.5);
         text-align: center;
@@ -62,6 +71,8 @@
         }
         
     }
+
+   
 }
 
 .memory-preview-item-loader{

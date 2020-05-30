@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 
+import MemoryPreviewItem from "./memoryPreviewItem.component"
 
 const MemoryScroller = ({loading, memories, ...other}) => {
 
@@ -9,7 +10,7 @@ const MemoryScroller = ({loading, memories, ...other}) => {
         <div className="memory-scroller">
             {
                 memories && memories.length > 0 ? 
-                    memories.map(memory => <MemoryItem key={memory.id}  memory={memory}/>)
+                    memories.map(memory => <MemoryPreviewItem key={memory.id}  memory={memory}/>)
                 : 
                     <p>No Memories yet.</p>
             }

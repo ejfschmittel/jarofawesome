@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import ContentLoader from 'react-content-loader'
-
+import {Link} from "react-router-dom"
 
 const variants = [
     "memory-preview-item__variant--red",
@@ -15,10 +14,6 @@ const variants = [
 ]
 
 let previous = null;
-
-const getVariant = () => {
-    return variants[Math.floor(Math.random() * variants.length)];
-}
 
 const getUniqueVariant = () => {
     let c = null;
@@ -36,7 +31,9 @@ const MemoryPreviewItem = ({memory}) => {
     const [variant] = useState(getUniqueVariant())
 
     return (
+       
         <div className={`memory-preview-item ${variant}`}>
+            <Link to={`/memories/${memory.id}`} className="memory-preview-item__link-wrapper" />
             <header className="memory-preview-item__header">
                 Memory: <span>{memory.date}</span>
             </header>
@@ -45,7 +42,9 @@ const MemoryPreviewItem = ({memory}) => {
                     {memory.memory}
                 </div>
             </div>
+            
         </div>
+        
     )
 }
 
