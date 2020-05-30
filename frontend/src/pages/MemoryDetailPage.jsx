@@ -134,6 +134,16 @@ const MemoryDetailPage = () => {
                 variables: {id: memoryid},
                 update: (cache, {data: {deleteMemory}}) => {
                     /* update after delte*/
+          
+                    const {memoryId} = deleteMemory
+                    const {recentMemories} = cache.readQuery({ query: RECENT_MEMORIES});
+                
+                    // remove from array if id matches
+                 
+                    cache.writeQuery({
+                        query: RECENT_MEMORIES, 
+                        data: {recentMemories: recentMemories.filter(memory => memory.id !== memoryId)}
+                    })
                 }
             })
             history.push(`/memories/`)
