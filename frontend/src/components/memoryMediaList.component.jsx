@@ -8,6 +8,8 @@ import {MediaOverlayContextProvider} from "../contexts/mediaOverlay.context"
 
 import {MEMORY_FILES} from "../graphql/memories.schemas"
 
+import MediaInput from "./MediaInput.component"
+
 
 
 const MemoryMediaList = ({id, hashKey}) => {
@@ -35,13 +37,29 @@ const MemoryMediaList = ({id, hashKey}) => {
 
     return (
         <MediaOverlayContextProvider>
-            <div className="media-list">
-                <MediaItemEditor memoryId={id}/>
-                { items.length > 0 ?                            
-                    items.map((item, index) => <MemoryMediaItem key={item.id} item={item} index={index}/> )
+
+            <div className="media-list__wrapper">
+                <div className="media-list__header">
+                   
+                    <MediaInput memoryId={id}/>
+                </div>
+
+
+                {items.length > 0 ? (
+                    <div className="media-list">
+                        { items.map((item, index) => (
+                             <MemoryMediaItem key={item.id} item={item} index={index}/>
+                        ))}
+                    </div>            
+                ) : (
+                   <div className="media-list__empty-text">
+                       <p>You haven't added any media items to your memory yet. Add some to make this memory more alive.</p>
+                    </div>
+                )}
+
+      
                 
-                : "No items yet"}
-                
+               
             </div>
             <MediaOverlay items={items} />
         </MediaOverlayContextProvider>

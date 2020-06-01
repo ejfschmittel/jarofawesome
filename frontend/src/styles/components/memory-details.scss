@@ -1,15 +1,27 @@
 .memory-details{
     
+   
 
     &__memory{
         text-align: center;
-        font-size: 2.2srem;
-        font-weight: 600;
+        font-size: 2.8rem;
+        font-weight: 100;
+        letter-spacing: .1rem;
+        margin-bottom: 2rem;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    &__header{
+        background: var(--white-1);
+        padding: 2rem;
+        box-shadow: 0 .2rem .5rem rgba(0,0,0,.1);
+        border-radius: .5rem;
+        margin-bottom: 3rem;
     }
 
     &__options{
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between
     }
 
     &__delete-btn{
@@ -18,7 +30,7 @@
         border: none;
         color: #fff;
         min-width: 20rem;
-        box-shadow: 0 .2rem .5rem rgba(0,0,0,.3);
+        
         outline: none;
         cursor: pointer;
     }

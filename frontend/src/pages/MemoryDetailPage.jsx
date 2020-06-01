@@ -156,7 +156,8 @@ const MemoryDetailPage = () => {
         <main>
             <div className="container">
                 <div className="memory-details">
-         
+
+                        <header className="memory-details__header">
                         <h1 className="memory-details__memory">
                             <EditableField
                                 value={!memory ? null : memory.memory}
@@ -177,6 +178,7 @@ const MemoryDetailPage = () => {
                                 Delete
                             </button>               
                         </div>
+                        </header>
 
 
                         <MemoryMediaList id={memory ? memory.id : null} hashKey={hashKey} />    
