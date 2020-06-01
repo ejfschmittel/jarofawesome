@@ -2,12 +2,14 @@ import {gql} from "apollo-boost"
 
 
 export const createMemorySchema = gql`
-    mutation createMemory($memory: String!){
-        createMemory(memory: $memory){
+    mutation createMemory($memory: String!, $date: Date){
+        createMemory(memory: $memory, date:$date){
             memory{
-            id,
-            memory,
-            description
+                id,
+                memory,
+                createdAt,
+                memoryDate,
+                description
             }
         }
     }
@@ -27,7 +29,8 @@ export const RECENT_MEMORIES = gql`
         recentMemories{
             id,
             memory,
-            date
+            createdAt,
+            memoryDate
         }
     }
 `;
@@ -39,7 +42,8 @@ export const GET_MEMORY = gql`
         memory(id:$id, hashKey:$hashKey){
             id,
             memory,
-            date
+            memoryDate,
+            createdAt
         }
     }
 `;
@@ -49,7 +53,8 @@ export const RANOM_MEMORY = gql`
         randomMemory{
             id,
             memory,
-            date
+            memoryDate,
+            createdAt
         }
     }
 `;
@@ -59,7 +64,8 @@ export const ALL_MEMORIES = gql`
         allMemories{
             id,
             memory,
-            date
+            memoryDate,
+            createdAt
         }
     }
 `;
@@ -83,7 +89,8 @@ export const MY_MEMORIES = gql`
                     pk,
                     id,
                     memory,
-                    date,
+                    memoryDate,
+                    createdAt
                 }
             } 
         }
@@ -94,10 +101,11 @@ export const UPDATE_MEMORY = gql`
 mutation updateMemory($id:  UUID!, $memory: String){
     updateMemory(data:{id:$id, memory: $memory}){
       memory{
-          id,
+        id,
         memory,
         description,
-        date
+        memoryDate,
+        createdAt
       }
     }
   }

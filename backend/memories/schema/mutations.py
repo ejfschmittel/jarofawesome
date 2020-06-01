@@ -17,14 +17,23 @@ class CreateMemory(graphene.Mutation):
 
     class Arguments:
         memory = graphene.String(required=True)
+        date = graphene.Date(required=False)
     
     @login_required
-    def mutate(self, info, memory):
+    def mutate(self, info, memory, **kwargs):
         user = info.context.user
-        item=Memory.objects.create(
-            memory=memory,
-            user=user
-        )
+        date = kwargs.get("date")
+
+        create_args = {
+            "memory": memory,
+            "user": user,
+        }
+
+        if date:
+            create_args["memory_date"] = date
+            
+        item = Memory.objects.create(**create_args)
+
         return CreateMemory(memory=item)
 
 class DeleteMemory(graphene.Mutation):
@@ -110,7 +119,8 @@ class CreateMemoryMedia(graphene.Mutation):
                     media_type = validate_external_url(external_url)
 
                 if file:
-                    validate_file = FileValidator(max_size=1024 * 1000, 
+                    
+                    validate_file = FileValidator(max_size=1024 * 10000, 
                                 content_types=(
                                     'image/jpeg',
                                     'image/gif',

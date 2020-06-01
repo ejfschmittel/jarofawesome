@@ -6,16 +6,16 @@ from ..models import Memory
 class MemoryFilter(django_filters.FilterSet):
 
     s = django_filters.CharFilter(method="filter_search")
-    from_date = django_filters.CharFilter(field_name="datetime", method="filter_from_date")
-    to_date = django_filters.CharFilter(field_name="datetime", method="filter_to_date")
+    from_date = django_filters.CharFilter(field_name="memory_date", method="filter_from_date")
+    to_date = django_filters.CharFilter(field_name="memory_date", method="filter_to_date")
 
 
     #order_by_date_asc = django_filters.CharFilter(field_name="datetime")
   
     order_by = django_filters.OrderingFilter(
        fields=(
-           ('-datetime', 'newest'),
-           ('datetime', 'oldest'),
+           ('-memory_date', 'newest'),
+           ('memory_date', 'oldest'),
        )
     )
     
@@ -37,4 +37,4 @@ class MemoryFilter(django_filters.FilterSet):
 
     class Meta:
         model = Memory
-        fields = ['memory', 'datetime']
+        fields = ['memory', 'created_at']

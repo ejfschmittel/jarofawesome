@@ -52,7 +52,7 @@ class MemoryQuery(object):
     @login_required
     def resolve_recent_memories(self, info, **kwargs):
         user = info.context.user
-        return Memory.objects.filter(user=user).order_by("-datetime")[:10]
+        return Memory.objects.filter(user=user).order_by("-created_at")[:10]
 
 
 class MemoryFileQuery(object):

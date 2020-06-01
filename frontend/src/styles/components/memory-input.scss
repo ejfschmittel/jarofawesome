@@ -1,0 +1,24 @@
+.memory-input{
+    width: 100%;
+    background: #fff;
+    display: flex;
+    box-shadow: 0 .1rem .2rem rgba(0,0,0,.2);
+
+    input{
+        outline: none;
+       
+        padding: 1rem 1rem 1rem 2rem;
+        font-size: 1.8rem;
+    }
+
+    &__memory{
+        flex: 1;
+        border: none;
+    }
+
+    &__date{
+        border: none;
+        border-left: 1px solid #eee;
+        margin: .2rem 0;
+    }
+}

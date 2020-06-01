@@ -35,16 +35,14 @@ class MemoryLinkUrlType(graphene.ObjectType):
 class MemoryWriteType(DjangoObjectType):
     class Meta:
         model = Memory
-        fields = ('id','memory', 'description', 'datetime')
+        fields = ('id','memory', 'description', 'created_at')
 
 
 
 class MemoryReadType(DjangoObjectType):
-    date = graphene.Date(source='date')
-
     class Meta:
         model = Memory
-        fields = ('id', 'memory', 'description')
+        fields = ('id', 'memory', 'description', 'created_at', 'memory_date')
 
 
 class MemoryNode(DjangoObjectType):
@@ -53,6 +51,6 @@ class MemoryNode(DjangoObjectType):
 
     class Meta:
         model = Memory
-        fields = ('id', 'memory', 'description', 'datetime')
+        fields = ('id', 'memory', 'description', 'created_at', 'memory_date')
       
         interfaces = (graphene.relay.Node,)

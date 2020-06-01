@@ -29,13 +29,13 @@ const getUniqueVariant = () => {
 
 const MemoryPreviewItem = ({memory}) => {
     const [variant] = useState(getUniqueVariant())
-
+    
     return (
        
         <div className={`memory-preview-item ${variant}`}>
             <Link to={`/memories/${memory.id}`} className="memory-preview-item__link-wrapper" />
             <header className="memory-preview-item__header">
-                Memory: <span>{memory.date}</span>
+                Memory: <span>{memory.memoryDate}</span>
             </header>
             <div className="memory-preview-item__body">
                 <div>

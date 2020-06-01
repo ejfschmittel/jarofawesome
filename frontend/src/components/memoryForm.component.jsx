@@ -1,29 +1,48 @@
 import React, {useState, useContext} from 'react'
 import {useLazyQuery, useMutation} from "@apollo/react-hooks"
 import {createMemorySchema} from "../graphql/memories.schemas"
-import CreateMemoryContext from "../contexts/createMemory.context"
+
+import MemoryInput from "./MemoryInput.component"
 /*
     fields (data, onChange)
 
 */
 
+const getCurrentDate = () => {
+    const utc = new Date().toJSON().slice(0,10)
+    return utc
+}
+
 const MemoryForm = ({title}) => {
-    const {onAfterMemoryCreate} = useContext(CreateMemoryContext)
-    const [memory, setMemory] = useState("")
+
+    const [memoryData, setMemoryData] = useState({
+        memory: "",
+        date: getCurrentDate()
+    })
     const [createMemory, {loading, data}] = useMutation(createMemorySchema)
 
-    
+    console.log(memoryData)
+
+    const onChange = (e) => {
+        console.log("onchange")
+        const {name, value} = e.target
+        if(memoryData.hasOwnProperty(name)){
+            console.log("onchange")
+            setMemoryData({...memoryData, [name]: value})
+        }  
+    }
 
     const onCreateMemory = async (e) => {
         e.preventDefault();
 
+
+        console.log(memoryData)
+
         try{
             const response = createMemory({
-                variables: {
-                    memory
-                }
+                variables: memoryData
             })
-            onAfterMemoryCreate(response)
+           
         }catch(e){
            console.log(e)
         }  
@@ -34,15 +53,12 @@ const MemoryForm = ({title}) => {
             <h1 className="memory-form__title">Create Memory</h1>
          
             <form>
-                <div className="memory-form__memory">
-                    {data && <p>Memory successfully created.</p>}
-                    <input name="memory" placeholder="My memory..." onChange={(e) => setMemory(e.target.value)} value={memory}/>
-                </div>
-
+                <MemoryInput values={memoryData} onChange={onChange}/>
                 <button className="memory-form__button" onClick={onCreateMemory}>Create Memory</button>
             </form>
         </div>
     )
 }
+
 
 export default MemoryForm
