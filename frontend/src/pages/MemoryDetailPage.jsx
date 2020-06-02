@@ -1,7 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useContext} from 'react'
 import {useParams, useLocation, useHistory} from "react-router-dom"
 import {useQuery, useMutation} from "@apollo/react-hooks"
 import {GET_MEMORY, UPDATE_MEMORY, DELETE_MEMORY, RECENT_MEMORIES} from "../graphql/memories.schemas"
+
+import AuthContext from "../contexts/auth.context"
 
 import MemoryMediaList from "../components/memoryMediaList.component"
 
@@ -78,7 +80,25 @@ const useSearchParams = () => {
     return query;
 }
 
+
+const useIsOwner = () => {
+    const [isOwner, setIsOwner] = useState(false)
+    const context = useContext(AuthContext)
+    console.log(context)
+    // get current user
+
+
+
+    const compareOwnership = (user) =>{
+
+    }
+
+
+    return [isOwner, compareOwnership]
+}
+
 const MemoryDetailPage = () => {
+    const [isOwner, setIscompareOwnershipOwner] = useIsOwner()
     const searchQuery = useSearchParams()
     const history = useHistory()
     const hashKey= searchQuery.get("key")

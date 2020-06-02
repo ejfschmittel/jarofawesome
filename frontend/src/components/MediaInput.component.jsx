@@ -23,8 +23,10 @@ const MediaInput = ({memoryId}) => {
 
     const onFileChange = (e) => {
         const {target: {validity, files: [file]}} = e
-        setFile(file)
-        setFileString(file.name)
+        if(validity && file){
+            setFile(file)
+            setFileString(file.name)
+        } 
     }
 
     const onSubmit = (e) => {
@@ -37,9 +39,6 @@ const MediaInput = ({memoryId}) => {
         }else{
             args["externalUrl"] = fileString
         }
-
-
-
         
         addMemoryFile({
             variables: args,
@@ -53,7 +52,12 @@ const MediaInput = ({memoryId}) => {
                         data: {memoryFiles: memoryFiles.concat([memoryFile])}
                  })
             }
-        })
+        }).then(
+            res => {
+                setFile(null)
+                setFileString("")
+            }
+        )
 
     }
 
@@ -62,7 +66,7 @@ const MediaInput = ({memoryId}) => {
         <div className="media-input">
             <input 
                 type="url" 
-                className="media-input__url" 
+                className={`media-input__url ${loading && 'media-input__url--loading'}`}
                 placeholder="url..." 
                 onChange={onFileStringChange} 
                 value={fileString}
