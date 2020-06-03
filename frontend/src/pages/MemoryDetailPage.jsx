@@ -98,7 +98,7 @@ const useIsOwner = () => {
 }
 
 const MemoryDetailPage = () => {
-    const [isOwner, setIscompareOwnershipOwner] = useIsOwner()
+    //const [isOwner, setIscompareOwnershipOwner] = useIsOwner()
     const searchQuery = useSearchParams()
     const history = useHistory()
     const hashKey= searchQuery.get("key")
@@ -170,6 +170,21 @@ const MemoryDetailPage = () => {
         }catch(e){
             console.log(e)
         }
+    }
+
+
+    
+    if(!loading && (!data || !data.memory)){
+        return (
+            <div className="not-found-page">
+                <div className="not-found-page__inner">
+                <h1 className="not-found-page__title">Memory has been forgotten or may have never existed</h1>
+                <button className="not-found-page__button">
+                    Back to homepage
+                </button>
+                </div>
+            </div>
+        )
     }
 
     return (

@@ -97,7 +97,7 @@ const FileButton = ({id, children, className, ...otherProps}) => {
     return (
         <React.Fragment>
             <input type="file" id={id}  {...otherProps} style={{display: "none"}}/>
-            <label for={id} className={className}>{children}</label>
+            <label htmlFor={id} className={className}>{children}</label>
         </React.Fragment>
         
     )
