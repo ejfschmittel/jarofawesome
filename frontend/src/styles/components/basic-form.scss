@@ -59,14 +59,24 @@
         align-items: center;
         transition: all .5s;
         margin-top: 2rem;
+
+        &--error{
+            background: var(--secondary-color);
+        }
+
+        &--success{
+            background: var(--thirtiary-color);
+        }
     }
 
-    &__controls--error{
-        background: var(--secondary-color);
-    }
+    
 
     &__error{
         color: var(--white-1); 
+    }
+
+    &__message{
+        color: var(--white-1);
     }
 
     &__field{
@@ -74,8 +84,23 @@
         margin: 1rem 0;
     }
 
-    &__input{
+    &__input-error{
+        margin-left: .5rem;
+        color: red;
+        font-size: 1rem;
+    }
 
+    &__field-info{
+        display: flex;
+        align-items: baseline;
+
+    }
+
+    &__input{
+        outline: none;
+        &--error{
+            border: 2px solid red;
+        }
 
     }
 

@@ -21,11 +21,28 @@ export const LOGIN_USER = gql`
     }
 `;
 
+export const SIGNUP_USER_2 = gql`
+mutation($input: SignUpUserInput!){
+    signUpUser(input: $input){
+          user{
+          id,
+          email,
+            username
+        },
+        errors{
+            field,
+            messages
+        }
+    }
+  }
+`;
+
 
 export const SIGNUP_USER = gql`
     mutation SignUp($username: String!, $email: String!, $password: String!){
         createUser(username:$username, email:$email, password:$password){
             user{
+                id,
                 username,
                 email,
             }

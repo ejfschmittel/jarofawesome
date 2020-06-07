@@ -1,8 +1,11 @@
 from django.contrib.auth import get_user_model
 import graphene
+from graphql import GraphQLError
 from graphene_django import DjangoObjectType
+from graphene_django.forms.mutation import DjangoModelFormMutation
 import graphql_jwt
 
+from .forms import SignUpForm
 
 User = get_user_model()
 
@@ -33,6 +36,9 @@ class CreateUser(graphene.Mutation):
         email = graphene.String(required=True)
 
     def mutate(self, info, email, username, password):
+        print(username)
+        print(email)
+
         user = User.objects.create(
             username=username,
             email=email
@@ -42,8 +48,20 @@ class CreateUser(graphene.Mutation):
 
         return CreateUser(user=user)
 
+
+ 
+
+class SignUpUser(DjangoModelFormMutation):
+    user = graphene.Field(UserType)
+    class Meta:
+        form_class = SignUpForm
+        return_field_name = 'user'
+
+
+
 class Mutation(graphene.ObjectType):
     create_user = CreateUser.Field()
+    sign_up_user = SignUpUser.Field()
     token_auth = graphql_jwt.ObtainJSONWebToken.Field()
     verify_token = graphql_jwt.Verify.Field()
     refresh_token = graphql_jwt.Refresh.Field()

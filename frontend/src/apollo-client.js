@@ -1,6 +1,6 @@
 //import ApolloClient from 'apollo-boost';
 
-import { onError } from 'apollo-link-error';
+import { onError } from 'apollo-link-error'
 import { ApolloLink, Observable } from 'apollo-link';
 import { InMemoryCache } from "apollo-cache-inmemory";
 
@@ -46,6 +46,10 @@ const request = async (operation) => {
   });
 };
 
+const errorLink = onError(({ graphQLErrors }) => {
+  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message))
+})
+
 const requestLink = new ApolloLink((operation, forward) =>
   new Observable(observer => {
     let handle;
@@ -71,6 +75,7 @@ const uploadLink = createUploadLink({ uri: GRAPQHL_ENDPOINT });
 
   const client = new ApolloClient({
     link: ApolloLink.from([
+      errorLink,
       requestLink,
       uploadLink,    
     ]),
