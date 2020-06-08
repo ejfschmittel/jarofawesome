@@ -31,6 +31,9 @@
         align-items: center;
         font-size: 1.4rem;
 
+        text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+        color: #fff;
+
         & > div{
             text-align: center;
             font-weight: 700;
@@ -44,6 +47,7 @@
         }
         &--green{
             background: #7B9E89;
+            color: #fff;
         }
 
         &--yellow{
