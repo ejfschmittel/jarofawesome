@@ -5,7 +5,7 @@
     overflow-x: scroll; 
     perspective: 1000px;
 
-
+    position: relative;
     display: flex;
     
     padding: 1rem 0;
@@ -16,6 +16,35 @@
 
     & > div:not(:last-child){
         margin-right: 1rem;
+    }
+
+    /* width */
+    &::-webkit-scrollbar {
+        height: 10px;              /* height of horizontal scrollbar ← You're missing this */
+       
+        border: 1px solid #d5d5d5;
+        background: rgba(0,0,0,.2);
+        background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet)  ;
+       
+        border-radius: 9px;
+        cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        background-color: #fff;
+        border: 3px solid transparent;
+        border-radius: 9px;
+        background-clip: content-box;
+ 
+        cursor: pointer;
+    }
+
+    &:hover::-webkit-scrollbar{
+        height: 16px;  
     }
 
  

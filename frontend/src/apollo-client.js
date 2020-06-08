@@ -46,8 +46,17 @@ const request = async (operation) => {
   });
 };
 
-const errorLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) graphQLErrors.map(({ message }) => console.log(message))
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message }) => console.log(`GraphQL Error: ${message}`));
+  }
+  if (networkError) {
+    console.log(`Network Error: ${networkError.message}`);
+  }
+
+  if (graphQLErrors || networkError) {
+    
+  }
 })
 
 const requestLink = new ApolloLink((operation, forward) =>
